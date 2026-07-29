@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Appraisal Journey - part 1</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+
+<div class="container">
+<img src="images/agent42_Labs_Logo.png" class="logo-top">
+
+<h2>Welcome to Your Appraisal Journey 2026</h2>
+<p>
+Before we begin, we would love to learn more about your experience with us. 
+Please take a few minutes to complete the details below and get ready to begin your appraisal journey.
+</p>
+
+<div class="phase-title">
+    <span>Your <span class="goals">G</span>oals</span> |
+    <span><span class="results">R</span>esults</span> |
+    <span><span class="opinion">O</span>pinion</span> |
+    <span><span class="wins">W</span>ins - GROW</span>
+</div>
+
+<h2>Your Goals</h2>
+<h3>Employee Details</h3>
+
+<form onsubmit="goToNextPage(event)">
+    
+    <input type="text" placeholder="Employee Name" pattern="[A-Za-z ]+" title="Only letters and spaces are allowed"required>
+
+    <input type="text" placeholder="Employee ID" pattern="[0-9]+" title="Employee ID must contain only numbers"required>
+    
+    <input type="text" placeholder="Department" pattern="[A-Za-z ]+" title="Only letters and spaces are allowed"required>
+    <input type="text" placeholder="Designation" pattern="[A-Za-z ]+" title="Only letters and spaces are allowed"required>
+    <input type="date" required>
+    <div class="btn-center">
+        <button type="submit">Submit</button>
+    </div>
+
+</form>
+
+
+<img src="images/agent42_Labs_Logo.png" class="logo-bottom">
+</div>
+
+
+<script src="js/form.js"></script>
+<script>
+function goToNextPage(event) {
+    event.preventDefault(); // stop reload
+
+    // IF validation passes → go next page
+    window.location.href = "questions.html";
+}
+</script>
+</body>
+</html>

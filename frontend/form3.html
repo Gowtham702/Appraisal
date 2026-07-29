@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Opinion</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <script>
+        function nextQuestion() {
+            let q1 = document.getElementById("answer1");
+
+            if (!q1.checkValidity()) {
+                q1.reportValidity();
+                return;
+            }
+
+            document.getElementById("q2").style.display = "block";
+            document.getElementById("nextBtn").style.display = "none";
+            document.getElementById("submitBtn").style.display = "block";
+        }
+
+        function goToPhase4() {
+            let q2 = document.getElementById("answer2");
+
+            if (!q2.checkValidity()) {
+                q2.reportValidity();
+                return;
+            }
+
+            window.location.href = "http://127.0.0.1:5500/frontend/form4.html";
+        }
+
+        window.onload = function () {
+            document.getElementById("q2").style.display = "none";
+            document.getElementById("submitBtn").style.display = "none";
+        };
+    </script>
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="images/agent42_Labs_Logo.png" class="logo-top">
+
+<div class="phase-title">
+    <span>Your <span class="goals">G</span>oals</span> |
+    <span><span class="results">R</span>esults</span> |
+    <span><span class="opinion">O</span>pinion</span> |
+    <span><span class="wins">W</span>ins - GROW</span>
+</div>
+
+<h2>Your Opinion</h2>
+
+<p>
+A discussion session will be conducted between the employee and reporting manager to review achievements, growth, feedback, development opportunities, and future goals.
+</p>
+
+<!-- Question 1 -->
+<h3>Question 1</h3>
+<p>
+Looking back at that impact and your overall work this review period, what is the single accomplishment you feel most internally proud of, and why did it mean so much to you?
+</p>
+
+<textarea id="answer1" required></textarea>
+
+<button id="nextBtn" onclick="nextQuestion()">Next</button>
+
+<!-- Question 2 -->
+<div id="q2">
+    <h3>Question 2</h3>
+    <p>
+    What new knowledge, learning experiences, or skill sets have you actively pursued this year to make yourself a better problem solver for the company?
+    </p>
+
+    <textarea id="answer2" required></textarea>
+</div>
+
+<!-- Submit -->
+<button id="submitBtn" onclick="goToPhase4()" style="display:block; margin:20px auto;">
+    Submit
+</button>
+
+<img src="images/agent42_Labs_Logo.png" class="logo-bottom">
+
+</div>
+
+</body>
+</html>

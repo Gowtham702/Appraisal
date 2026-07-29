@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Login | Employee Appraisal</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --deep-green: #073d2c;
+            --green: #087f5b;
+            --light-green: #dff7eb;
+            --mint: #f2fff8;
+            --gold: #d8a832;
+            --text: #18352b;
+            --muted: #718078;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Poppins", sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            color: var(--text);
+
+            background:
+                radial-gradient(
+                    circle at 12% 15%,
+                    rgba(46, 190, 127, 0.25),
+                    transparent 34%
+                ),
+                radial-gradient(
+                    circle at 88% 85%,
+                    rgba(216, 168, 50, 0.15),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #e8fff3,
+                    #d7f7e7,
+                    #f8fff9
+                );
+        }
+
+        .login-wrapper {
+            width: min(980px, 100%);
+            min-height: 590px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.88);
+            box-shadow:
+                0 35px 90px rgba(7, 61, 44, 0.20);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(18px);
+        }
+
+        .brand-panel {
+            position: relative;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: white;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(7, 61, 44, 0.96),
+                    rgba(8, 127, 91, 0.93)
+                );
+        }
+
+        .brand-panel::before,
+        .brand-panel::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .brand-panel::before {
+            width: 280px;
+            height: 280px;
+            top: -90px;
+            right: -100px;
+        }
+
+        .brand-panel::after {
+            width: 200px;
+            height: 200px;
+            left: -80px;
+            bottom: -70px;
+        }
+
+        .brand-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 16px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.13);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.6px;
+        }
+
+        .brand-panel h1 {
+            margin-top: 70px;
+            font-size: clamp(36px, 5vw, 55px);
+            line-height: 1.13;
+        }
+
+        .brand-panel p {
+            margin-top: 22px;
+            max-width: 390px;
+            color: rgba(255, 255, 255, 0.78);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .brand-footer {
+            position: relative;
+            z-index: 1;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .login-panel {
+            padding: 65px 58px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-panel h2 {
+            font-size: 31px;
+            color: var(--deep-green);
+        }
+
+        .login-subtitle {
+            margin-top: 9px;
+            margin-bottom: 35px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #345248;
+        }
+
+        .input-box {
+            display: flex;
+            align-items: center;
+            min-height: 54px;
+            border: 1px solid #d5e6dd;
+            border-radius: 14px;
+            background: #f9fffb;
+            transition: 0.25s;
+        }
+
+        .input-box:focus-within {
+            border-color: var(--green);
+            box-shadow:
+                0 0 0 4px rgba(8, 127, 91, 0.10);
+            background: white;
+        }
+
+        .input-icon {
+            width: 48px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .input-box input {
+            width: 100%;
+            min-height: 52px;
+            border: none;
+            outline: none;
+            padding: 0 16px 0 0;
+            background: transparent;
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        .login-button {
+            width: 100%;
+            min-height: 54px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            color: white;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--deep-green),
+                    var(--green)
+                );
+
+            box-shadow:
+                0 14px 28px rgba(8, 127, 91, 0.22);
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 18px 32px rgba(8, 127, 91, 0.28);
+        }
+
+        .login-button:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+            transform: none;
+        }
+
+        .message {
+            display: none;
+            margin-top: 18px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .message.error {
+            display: block;
+            color: #a32626;
+            background: #fff0f0;
+            border: 1px solid #ffd0d0;
+        }
+
+        .message.success {
+            display: block;
+            color: #08613f;
+            background: #e9fff4;
+            border: 1px solid #bdebd3;
+        }
+
+        .security-note {
+            margin-top: 28px;
+            text-align: center;
+            color: #87958e;
+            font-size: 12px;
+        }
+
+        @media (max-width: 800px) {
+            body {
+                padding: 18px;
+            }
+
+            .login-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .brand-panel {
+                display: none;
+            }
+
+            .login-panel {
+                padding: 48px 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-wrapper">
+
+    <section class="brand-panel">
+
+        <div class="brand-content">
+
+            <div class="brand-label">
+                ● AGENT42 LABS
+            </div>
+
+            <h1>
+                Appraisal<br>
+                Admin Portal
+            </h1>
+
+            <p>
+                Securely review employee information,
+                appraisal responses, challenge submissions
+                and overall progress from one dashboard.
+            </p>
+
+        </div>
+
+        <div class="brand-footer">
+            Employee Appraisal Management System
+        </div>
+
+    </section>
+
+    <section class="login-panel">
+
+        <h2>Admin Login</h2>
+
+        <p class="login-subtitle">
+            Enter your administrator credentials to access
+            confidential employee information.
+        </p>
+
+        <form id="loginForm">
+
+            <div class="form-group">
+
+                <label for="username">
+                    Admin username
+                </label>
+
+                <div class="input-box">
+                    <span class="input-icon">👤</span>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Enter username"
+                        autocomplete="username"
+                        required
+                    >
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-box">
+                    <span class="input-icon">🔒</span>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter password"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="login-button"
+                id="loginButton"
+            >
+                Sign in securely
+            </button>
+
+            <div
+                id="message"
+                class="message"
+            ></div>
+
+        </form>
+
+        <div class="security-note">
+            🔐 This page is restricted to authorised administrators.
+        </div>
+
+    </section>
+
+</div>
+
+<script>
+    const API_URL = "http://127.0.0.1:8081/api";
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const loginButton =
+        document.getElementById("loginButton");
+
+    const message =
+        document.getElementById("message");
+
+    checkExistingSession();
+
+    async function checkExistingSession() {
+        try {
+            const response = await fetch(
+                `${API_URL}/auth/me`,
+                {
+                    method: "GET",
+                    credentials: "include"
+                }
+            );
+
+            if (response.ok) {
+                window.location.replace("admin.html");
+            }
+        } catch (error) {
+            console.log("No active admin session");
+        }
+    }
+
+    loginForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+            const username =
+                document.getElementById("username")
+                    .value.trim();
+
+            const password =
+                document.getElementById("password")
+                    .value;
+
+            message.className = "message";
+            message.textContent = "";
+
+            loginButton.disabled = true;
+            loginButton.textContent = "Signing in...";
+
+            try {
+                const response = await fetch(
+                    `${API_URL}/auth/login`,
+                    {
+                        method: "POST",
+
+                        credentials: "include",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            username: username,
+                            password: password
+                        })
+                    }
+                );
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(
+                        data.message ||
+                        "Admin login failed"
+                    );
+                }
+
+                message.className =
+                    "message success";
+
+                message.textContent =
+                    "Login successful. Opening dashboard...";
+
+                setTimeout(function () {
+                    window.location.replace(
+                        "admin.html"
+                    );
+                }, 600);
+
+            } catch (error) {
+
+                message.className =
+                    "message error";
+
+                message.textContent =
+                    error.message;
+
+            } finally {
+
+                loginButton.disabled = false;
+
+                loginButton.textContent =
+                    "Sign in securely";
+            }
+        }
+    );
+</script>
+
+</body>
+</html>

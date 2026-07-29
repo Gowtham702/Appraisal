@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Employee Information</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+}
+
+.card {
+    width: 650px;
+    padding: 50px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.logo {
+    display: block;
+    margin: 0 auto 25px;
+    width: 140px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 30px;
+    color: #065f46;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 15px;
+    color: #047857;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    color: #065f46;
+    margin-bottom: 6px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #a7f3d0;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 6px rgba(16,185,129,0.4);
+}
+
+.btn {
+    width: 100%;
+    margin-top: 20px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(16,185,129,0.4);
+}
+
+@media(max-width: 700px) {
+    .card {
+        width: 90%;
+        padding: 30px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+    <img src="images/agent42_Labs_Logo.png" class="logo" alt="Logo">
+
+    <h1>Employee Information</h1>
+
+    <div class="subtitle">
+        Tell us a bit about yourself to begin
+    </div>
+
+    <!-- UPDATED FORM ACTION -->
+    <form action="http://127.0.0.1:5500/frontend/spin.html">
+
+        <div class="form-group">
+            <label>Employee Name</label>
+            <input type="text" required>
+        </div>
+
+        <div class="form-group">
+            <label>Employee ID</label>
+            <input type="number" required>
+        </div>
+
+        <div class="form-group">
+            <label>Department</label>
+            <input type="text" required>
+        </div>
+
+        <div class="form-group">
+            <label>Current Role</label>
+            <input type="text" required>
+        </div>
+
+        <button type="submit" class="btn">Continue</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

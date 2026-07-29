@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Dashboard</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark: #073d2c;
+            --green: #087f5b;
+            --green-two: #13a36f;
+            --mint: #e8faf1;
+            --background: #f3f8f5;
+            --white: #ffffff;
+            --text: #1c352c;
+            --muted: #718078;
+            --border: #dfebe5;
+            --danger: #c53b3b;
+            --shadow: 0 18px 50px rgba(19, 68, 48, 0.09);
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Poppins", sans-serif;
+            color: var(--text);
+            background: var(--background);
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            inset: 0 auto 0 0;
+            width: 260px;
+            padding: 30px 22px;
+            display: flex;
+            flex-direction: column;
+            color: white;
+
+            background:
+                linear-gradient(
+                    170deg,
+                    #052f22,
+                    #087f5b
+                );
+        }
+
+        .logo-area {
+            padding: 4px 12px 32px;
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.11);
+        }
+
+        .logo-area h2 {
+            font-size: 20px;
+        }
+
+        .logo-area p {
+            margin-top: 5px;
+            color: rgba(255, 255, 255, 0.58);
+            font-size: 11px;
+        }
+
+        .nav {
+            margin-top: 30px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            width: 100%;
+            margin-bottom: 8px;
+            padding: 14px 15px;
+            border: none;
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.75);
+            background: transparent;
+            font-family: inherit;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        .nav-item.active {
+            color: white;
+            background: rgba(255, 255, 255, 0.13);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+        }
+
+        .admin-profile {
+            padding: 14px;
+            border-radius: 13px;
+            background: rgba(255, 255, 255, 0.10);
+        }
+
+        .admin-profile strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .admin-profile span {
+            color: rgba(255, 255, 255, 0.58);
+            font-size: 11px;
+        }
+
+        .logout-button {
+            width: 100%;
+            margin-top: 12px;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 11px;
+            color: white;
+            background: transparent;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .main-content {
+            grid-column: 2;
+            padding: 34px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+        }
+
+        .topbar h1 {
+            color: var(--dark);
+            font-size: 28px;
+        }
+
+        .topbar p {
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .refresh-button {
+            padding: 11px 18px;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            color: var(--dark);
+            background: white;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 500;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+            padding: 24px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: white;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card::after {
+            content: "";
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            right: -27px;
+            bottom: -38px;
+            border-radius: 50%;
+            background: var(--mint);
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            margin-top: 9px;
+            color: var(--dark);
+            font-size: 31px;
+            font-weight: 700;
+        }
+
+        .stat-description {
+            margin-top: 5px;
+            color: #8b9891;
+            font-size: 11px;
+        }
+
+        .content-card {
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            background: white;
+            box-shadow: var(--shadow);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 22px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-header h2 {
+            color: var(--dark);
+            font-size: 18px;
+        }
+
+        .search-box {
+            width: min(330px, 100%);
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 11px 15px;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .search-box input:focus {
+            border-color: var(--green);
+            box-shadow:
+                0 0 0 3px rgba(8, 127, 91, 0.09);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th {
+            padding: 15px 20px;
+            color: #67776f;
+            background: #f8fbf9;
+            font-size: 11px;
+            font-weight: 600;
+            text-align: left;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        td {
+            padding: 17px 20px;
+            border-top: 1px solid #edf3ef;
+            font-size: 13px;
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background: #fbfefc;
+        }
+
+        .employee-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .employee-avatar {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            border-radius: 12px;
+            color: white;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--dark),
+                    var(--green-two)
+                );
+            font-weight: 600;
+        }
+
+        .employee-cell strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .employee-cell span {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            color: #087348;
+            background: #e7faef;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .view-button {
+            padding: 8px 13px;
+            border: none;
+            border-radius: 9px;
+            color: white;
+            background: var(--green);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 11px;
+        }
+
+        .empty-state {
+            display: none;
+            padding: 60px 20px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .loading {
+            padding: 60px 20px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            background: rgba(3, 32, 23, 0.62);
+            backdrop-filter: blur(6px);
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            width: min(850px, 100%);
+            max-height: 88vh;
+            overflow-y: auto;
+            border-radius: 22px;
+            background: white;
+            box-shadow:
+                0 35px 90px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-header {
+            position: sticky;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 22px 25px;
+            border-bottom: 1px solid var(--border);
+            background: white;
+            z-index: 2;
+        }
+
+        .modal-header h2 {
+            color: var(--dark);
+            font-size: 19px;
+        }
+
+        .close-button {
+            width: 34px;
+            height: 34px;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 20px;
+            background: #eff5f1;
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .detail-box {
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #fbfefc;
+        }
+
+        .detail-box label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--muted);
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+
+        .detail-box p {
+            font-size: 13px;
+            font-weight: 500;
+            overflow-wrap: anywhere;
+        }
+
+        .answers-title {
+            margin: 28px 0 14px;
+            color: var(--dark);
+            font-size: 17px;
+        }
+
+        .answer-card {
+            margin-bottom: 12px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #fbfefc;
+        }
+
+        .answer-card strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--green);
+            font-size: 12px;
+        }
+
+        .answer-card p {
+            color: #42584f;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 900px) {
+            .dashboard {
+                display: block;
+            }
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                min-height: auto;
+            }
+
+            .nav,
+            .sidebar-footer {
+                display: none;
+            }
+
+            .main-content {
+                padding: 23px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .topbar,
+            .card-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+
+        <div class="logo-area">
+            <h2>Agent42 Labs</h2>
+            <p>Appraisal Administration</p>
+        </div>
+
+        <nav class="nav">
+
+            <button class="nav-item active">
+                <span>▦</span>
+                Dashboard
+            </button>
+
+            <button class="nav-item">
+                <span>👥</span>
+                Employees
+            </button>
+
+            <button class="nav-item">
+                <span>✓</span>
+                Appraisal Responses
+            </button>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <div class="admin-profile">
+                <strong id="adminName">Administrator</strong>
+                <span>Secure admin access</span>
+            </div>
+
+            <button
+                class="logout-button"
+                onclick="logoutAdmin()"
+            >
+                Sign out
+            </button>
+
+        </div>
+
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+                <h1>Admin Dashboard</h1>
+
+                <p>
+                    Monitor employee appraisal information
+                    and responses.
+                </p>
+            </div>
+
+            <button
+                class="refresh-button"
+                onclick="loadDashboard()"
+            >
+                ↻ Refresh data
+            </button>
+
+        </header>
+
+        <section class="stats-grid">
+
+            <article class="stat-card">
+                <div class="stat-label">
+                    Total employees
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="totalEmployees"
+                >
+                    0
+                </div>
+
+                <div class="stat-description">
+                    Registered appraisal members
+                </div>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-label">
+                    Form answers
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="totalAnswers"
+                >
+                    0
+                </div>
+
+                <div class="stat-description">
+                    Submitted appraisal responses
+                </div>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-label">
+                    Current status
+                </div>
+
+                <div class="stat-value">
+                    Active
+                </div>
+
+                <div class="stat-description">
+                    Backend and database connected
+                </div>
+            </article>
+
+        </section>
+
+        <section class="content-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h2>Employee Information</h2>
+                </div>
+
+                <div class="search-box">
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Search name, ID or department"
+                    >
+                </div>
+
+            </div>
+
+            <div
+                class="loading"
+                id="loading"
+            >
+                Loading employee details...
+            </div>
+
+            <div class="table-wrapper">
+
+                <table id="employeeTable">
+
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Employee ID</th>
+                            <th>Department</th>
+                            <th>Current role</th>
+                            <th>Status</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="employeeTableBody"></tbody>
+
+                </table>
+
+            </div>
+
+            <div
+                class="empty-state"
+                id="emptyState"
+            >
+                No employee records were found.
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<div
+    class="modal"
+    id="employeeModal"
+>
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Employee Appraisal Details</h2>
+
+            <button
+                class="close-button"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div
+            class="modal-body"
+            id="modalBody"
+        ></div>
+
+    </div>
+
+</div>
+
+<script>
+    const API_URL = "http://127.0.0.1:8081/api";
+
+    let allEmployees = [];
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initialiseDashboard
+    );
+
+    async function initialiseDashboard() {
+
+        const authenticated =
+            await verifyAdminSession();
+
+        if (!authenticated) {
+            return;
+        }
+
+        await loadDashboard();
+    }
+
+    async function verifyAdminSession() {
+
+        try {
+            const response = await fetch(
+                `${API_URL}/auth/me`,
+                {
+                    credentials: "include"
+                }
+            );
+
+            if (!response.ok) {
+                window.location.replace(
+                    "admin-login.html"
+                );
+
+                return false;
+            }
+
+            const admin = await response.json();
+
+            document.getElementById(
+                "adminName"
+            ).textContent = admin.username;
+
+            return true;
+
+        } catch (error) {
+
+            window.location.replace(
+                "admin-login.html"
+            );
+
+            return false;
+        }
+    }
+
+    async function loadDashboard() {
+
+        const loading =
+            document.getElementById("loading");
+
+        const table =
+            document.getElementById("employeeTable");
+
+        const emptyState =
+            document.getElementById("emptyState");
+
+        loading.style.display = "block";
+        table.style.display = "none";
+        emptyState.style.display = "none";
+
+        try {
+            const response = await fetch(
+                `${API_URL}/admin/dashboard`,
+                {
+                    method: "GET",
+                    credentials: "include"
+                }
+            );
+
+            if (response.status === 401 ||
+                response.status === 403) {
+
+                window.location.replace(
+                    "admin-login.html"
+                );
+
+                return;
+            }
+
+            if (!response.ok) {
+                throw new Error(
+                    "Unable to load the admin dashboard"
+                );
+            }
+
+            const data = await response.json();
+
+            allEmployees =
+                Array.isArray(data.employees)
+                    ? data.employees
+                    : [];
+
+            document.getElementById(
+                "totalEmployees"
+            ).textContent =
+                data.totalEmployees || 0;
+
+            document.getElementById(
+                "totalAnswers"
+            ).textContent =
+                data.totalAnswers || 0;
+
+            renderEmployees(allEmployees);
+
+        } catch (error) {
+
+            emptyState.textContent =
+                error.message;
+
+            emptyState.style.display = "block";
+
+        } finally {
+
+            loading.style.display = "none";
+        }
+    }
+
+    function renderEmployees(employees) {
+
+        const table =
+            document.getElementById("employeeTable");
+
+        const emptyState =
+            document.getElementById("emptyState");
+
+        const tableBody =
+            document.getElementById(
+                "employeeTableBody"
+            );
+
+        tableBody.innerHTML = "";
+
+        if (!employees.length) {
+            table.style.display = "none";
+            emptyState.style.display = "block";
+            return;
+        }
+
+        emptyState.style.display = "none";
+        table.style.display = "table";
+
+        employees.forEach(function (employee) {
+
+            const name = getEmployeeName(employee);
+            const initial = name
+                ? name.charAt(0).toUpperCase()
+                : "E";
+
+            const row =
+                document.createElement("tr");
+
+            row.innerHTML = `
+                <td>
+                    <div class="employee-cell">
+                        <div class="employee-avatar">
+                            ${escapeHtml(initial)}
+                        </div>
+
+                        <div>
+                            <strong>
+                                ${escapeHtml(name)}
+                            </strong>
+
+                            <span>
+                                Database ID:
+                                ${escapeHtml(
+                                    employee.id ?? "-"
+                                )}
+                            </span>
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        employee.employeeCode ??
+                        employee.employeeId ??
+                        "-"
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        employee.department ?? "-"
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        employee.currentRole ??
+                        employee.designation ??
+                        "-"
+                    )}
+                </td>
+
+                <td>
+                    <span class="status">
+                        Submitted
+                    </span>
+                </td>
+
+                <td>
+                    <button
+                        class="view-button"
+                        onclick="viewEmployee(
+                            ${Number(employee.id)}
+                        )"
+                    >
+                        View details
+                    </button>
+                </td>
+            `;
+
+            tableBody.appendChild(row);
+        });
+    }
+
+    function getEmployeeName(employee) {
+
+        return employee.employeeName ||
+               employee.name ||
+               "Unnamed employee";
+    }
+
+    document.getElementById(
+        "searchInput"
+    ).addEventListener(
+        "input",
+        function () {
+
+            const keyword =
+                this.value.trim().toLowerCase();
+
+            const filtered =
+                allEmployees.filter(
+                    function (employee) {
+
+                        const searchableText = [
+                            getEmployeeName(employee),
+                            employee.employeeCode,
+                            employee.employeeId,
+                            employee.department,
+                            employee.currentRole,
+                            employee.designation
+                        ]
+                        .filter(Boolean)
+                        .join(" ")
+                        .toLowerCase();
+
+                        return searchableText.includes(
+                            keyword
+                        );
+                    }
+                );
+
+            renderEmployees(filtered);
+        }
+    );
+
+    async function viewEmployee(employeeId) {
+
+        const modal =
+            document.getElementById(
+                "employeeModal"
+            );
+
+        const modalBody =
+            document.getElementById(
+                "modalBody"
+            );
+
+        modal.classList.add("show");
+
+        modalBody.innerHTML =
+            `<div class="loading">
+                Loading employee appraisal details...
+             </div>`;
+
+        try {
+            const response = await fetch(
+                `${API_URL}/admin/employees/${employeeId}`,
+                {
+                    credentials: "include"
+                }
+            );
+
+            if (response.status === 401 ||
+                response.status === 403) {
+
+                window.location.replace(
+                    "admin-login.html"
+                );
+
+                return;
+            }
+
+            if (!response.ok) {
+                throw new Error(
+                    "Unable to load employee details"
+                );
+            }
+
+            const data = await response.json();
+
+            showEmployeeDetails(
+                data.employee,
+                data.answers || []
+            );
+
+        } catch (error) {
+
+            modalBody.innerHTML = `
+                <div class="empty-state"
+                     style="display:block">
+                    ${escapeHtml(error.message)}
+                </div>
+            `;
+        }
+    }
+
+    function showEmployeeDetails(
+        employee,
+        answers
+    ) {
+
+        const modalBody =
+            document.getElementById(
+                "modalBody"
+            );
+
+        let answerHtml = "";
+
+        if (!answers.length) {
+
+            answerHtml = `
+                <div class="answer-card">
+                    <p>
+                        No appraisal answers have been
+                        submitted by this employee.
+                    </p>
+                </div>
+            `;
+
+        } else {
+
+            answers.forEach(function (
+                response,
+                index
+            ) {
+
+                const heading =
+                    response.questionKey ||
+                    response.phase ||
+                    `Response ${index + 1}`;
+
+                const answer =
+                    response.answer ||
+                    response.response ||
+                    response.answerText ||
+                    "No answer";
+
+                answerHtml += `
+                    <div class="answer-card">
+                        <strong>
+                            ${escapeHtml(heading)}
+                        </strong>
+
+                        <p>
+                            ${escapeHtml(answer)}
+                        </p>
+                    </div>
+                `;
+            });
+        }
+
+        modalBody.innerHTML = `
+            <div class="details-grid">
+
+                ${detailBox(
+                    "Employee name",
+                    getEmployeeName(employee)
+                )}
+
+                ${detailBox(
+                    "Employee code",
+                    employee.employeeCode ||
+                    employee.employeeId ||
+                    "-"
+                )}
+
+                ${detailBox(
+                    "Department",
+                    employee.department || "-"
+                )}
+
+                ${detailBox(
+                    "Current role",
+                    employee.currentRole ||
+                    employee.designation ||
+                    "-"
+                )}
+
+                ${detailBox(
+                    "Date of joining",
+                    employee.dateOfJoining || "-"
+                )}
+
+                ${detailBox(
+                    "Database record ID",
+                    employee.id || "-"
+                )}
+
+            </div>
+
+            <h3 class="answers-title">
+                Appraisal Responses
+            </h3>
+
+            ${answerHtml}
+        `;
+    }
+
+    function detailBox(label, value) {
+
+        return `
+            <div class="detail-box">
+                <label>
+                    ${escapeHtml(label)}
+                </label>
+
+                <p>
+                    ${escapeHtml(value)}
+                </p>
+            </div>
+        `;
+    }
+
+    function closeModal() {
+
+        document.getElementById(
+            "employeeModal"
+        ).classList.remove("show");
+    }
+
+    document.getElementById(
+        "employeeModal"
+    ).addEventListener(
+        "click",
+        function (event) {
+
+            if (event.target === this) {
+                closeModal();
+            }
+        }
+    );
+
+    async function logoutAdmin() {
+
+        try {
+            await fetch(
+                `${API_URL}/auth/logout`,
+                {
+                    method: "POST",
+                    credentials: "include"
+                }
+            );
+        } finally {
+
+            window.location.replace(
+                "admin-login.html"
+            );
+        }
+    }
+
+    function escapeHtml(value) {
+
+        return String(value ?? "")
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#039;");
+    }
+</script>
+
+</body>
+</html>

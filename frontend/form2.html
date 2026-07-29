@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Results</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <script>
+        function nextQuestion() {
+            let q1 = document.getElementById("answer1");
+
+            // Use built-in validation
+            if (!q1.checkValidity()) {
+                q1.reportValidity();
+                return;
+            }
+
+            document.getElementById("q2").style.display = "block";
+            document.getElementById("nextBtn").style.display = "none";
+            document.getElementById("submitBtn").style.display = "block";
+        }
+
+        function goToPhase3() {
+            let q2 = document.getElementById("answer2");
+
+            // Built-in validation
+            if (!q2.checkValidity()) {
+                q2.reportValidity();
+                return;
+            }
+
+            window.location.href = "http://127.0.0.1:5500/frontend/form3.html";
+        }
+
+        window.onload = function () {
+            document.getElementById("q2").style.display = "none";
+            document.getElementById("submitBtn").style.display = "none";
+        };
+    </script>
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="images/agent42_Labs_Logo.png" class="logo-top">
+
+<div class="phase-title">
+    <span>Your <span class="goals">G</span>oals</span> |
+    <span><span class="results">R</span>esults</span> |
+    <span><span class="opinion">O</span>pinion</span> |
+    <span><span class="wins">W</span>ins - GROW</span>
+</div>
+
+<h2>Your Results</h2>
+
+<!-- Question 1 -->
+<h3>Question 1</h3>
+<p>
+How has actively building on those skills and deepening your understanding of our business domain changed the way you view your role and its place in the industry this year?
+</p>
+
+<textarea id="answer1" required></textarea>
+
+<button id="nextBtn" onclick="nextQuestion()">Next</button>
+
+<!-- Question 2 -->
+<div id="q2">
+    <h3>Question 2</h3>
+    <p>
+    When you look at our daily operations, what is one tool, process, or system you identified as an opportunity for improvement to help the work smarter, not harder?
+    </p>
+
+    <textarea id="answer2" required></textarea>
+</div>
+
+<!-- Submit -->
+<button id="submitBtn" onclick="goToPhase3()" style="display:block; margin:20px auto;">
+    Submit
+</button>
+
+<img src="images/agent42_Labs_Logo.png" class="logo-bottom">
+
+</div>
+
+</body>
+</html>

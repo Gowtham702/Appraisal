@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Challenge Details</title>
+
+    <style>
+        :root{
+            --green-1:#0b3d2e;
+            --green-2:#146c43;
+            --green-3:#1f9d5b;
+            --green-4:#4fbf80;
+            --mint-1:#eafaf1;
+            --mint-2:#d8f3e2;
+            --blue-1:#0f5f9c;
+            --blue-2:#1d72b8;
+            --blue-3:#14578f;
+            --ink:#122620;
+            --muted:#5c6b63;
+            --shadow:0 28px 65px rgba(11,61,46,0.22);
+        }
+
+        *{
+            box-sizing:border-box;
+        }
+
+        body{
+            margin:0;
+            min-height:100vh;
+            padding:40px 20px;
+            font-family:'Segoe UI',Arial,sans-serif;
+            color:var(--ink);
+
+            background:
+                radial-gradient(
+                    circle at 12% 8%,
+                    rgba(31,157,91,.20),
+                    transparent 42%
+                ),
+                radial-gradient(
+                    circle at 92% 88%,
+                    rgba(11,61,46,.16),
+                    transparent 46%
+                ),
+                linear-gradient(
+                    160deg,
+                    #eef7f2,
+                    #e0f0e6
+                );
+        }
+
+        .page-wrapper{
+            width:100%;
+            min-height:calc(100vh - 80px);
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+        }
+
+        .container{
+            width:min(720px,92vw);
+            background:
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(79,191,128,.18),
+                    transparent 50%
+                ),
+                linear-gradient(
+                    165deg,
+                    rgba(255,255,255,.96),
+                    var(--mint-1)
+                );
+
+            border-radius:22px;
+            box-shadow:
+                var(--shadow),
+                0 0 0 1px rgba(20,108,67,.13);
+
+            overflow:hidden;
+        }
+
+        .accent-bar{
+            width:100%;
+            height:8px;
+
+            background:linear-gradient(
+                90deg,
+                var(--green-1),
+                var(--green-3),
+                var(--green-4),
+                var(--green-2)
+            );
+        }
+
+        .content{
+            padding:30px 38px 36px;
+        }
+
+        .top-header{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:20px;
+            margin-bottom:24px;
+        }
+
+        .top-logo img{
+            display:block;
+            width:150px;
+            max-width:100%;
+            height:auto;
+        }
+
+        .page-label{
+            padding:7px 14px;
+            border-radius:20px;
+            background:rgba(31,157,91,.12);
+            color:var(--green-1);
+            font-size:13px;
+            font-weight:700;
+            white-space:nowrap;
+        }
+
+        h1{
+            margin:0 0 14px;
+            color:var(--blue-1);
+            font-size:31px;
+            line-height:1.25;
+            overflow-wrap:anywhere;
+        }
+
+        #challengeDescription{
+            margin:0;
+            color:#4b5b55;
+            font-size:17px;
+            line-height:1.7;
+            font-weight:600;
+        }
+
+        .upload-box{
+            margin-top:30px;
+        }
+
+        .upload-label{
+            display:block;
+            margin-bottom:12px;
+            color:var(--green-1);
+            font-size:16px;
+            font-weight:700;
+        }
+        .upload-note{
+            margin:0 0 15px;
+            padding:12px 16px;
+            background:#edf9f2;
+            border-left:4px solid var(--green-3);
+            border-radius:8px;
+            color:#42554c;
+            font-size:14px;
+            line-height:1.6;
+        }
+
+        .upload-note strong{
+            color:var(--green-1);
+        }
+
+        .file-input-wrapper{
+            position:relative;
+        }
+
+        input[type="file"]{
+            display:block;
+            width:100%;
+            padding:18px;
+            border:2px dashed #4f9fe5;
+            border-radius:12px;
+            background:rgba(255,255,255,.75);
+            color:var(--ink);
+            font-family:inherit;
+            font-size:14px;
+            cursor:pointer;
+            outline:none;
+            transition:
+                border-color .2s ease,
+                background .2s ease,
+                box-shadow .2s ease;
+        }
+
+        input[type="file"]:hover{
+            border-color:var(--blue-2);
+            background:#ffffff;
+        }
+
+        input[type="file"]:focus{
+            border-color:var(--blue-2);
+            box-shadow:0 0 0 4px rgba(29,114,184,.12);
+        }
+
+        input[type="file"]::file-selector-button{
+            margin-right:14px;
+            padding:9px 14px;
+            border:none;
+            border-radius:8px;
+            background:var(--green-2);
+            color:white;
+            font-weight:700;
+            cursor:pointer;
+        }
+
+        .file-information{
+            margin-top:9px;
+            min-height:18px;
+            color:var(--muted);
+            font-size:13px;
+        }
+
+        .submit-btn{
+            width:100%;
+            margin-top:26px;
+            padding:15px;
+            border:none;
+            border-radius:11px;
+            background:linear-gradient(
+                135deg,
+                var(--blue-2),
+                var(--blue-1)
+            );
+            color:white;
+            font-family:inherit;
+            font-size:17px;
+            font-weight:700;
+            cursor:pointer;
+            box-shadow:0 12px 24px rgba(15,95,156,.24);
+            transition:
+                transform .15s ease,
+                box-shadow .15s ease,
+                opacity .15s ease;
+        }
+
+        .submit-btn:hover:not(:disabled){
+            background:linear-gradient(
+                135deg,
+                var(--blue-1),
+                var(--blue-3)
+            );
+            box-shadow:0 16px 28px rgba(15,95,156,.32);
+        }
+
+        .submit-btn:active:not(:disabled){
+            transform:scale(.98);
+        }
+
+        .submit-btn:disabled{
+            opacity:.55;
+            cursor:not-allowed;
+            box-shadow:none;
+        }
+
+        .error-message{
+            display:none;
+            margin-top:18px;
+            padding:12px 14px;
+            border:1px solid #e2a8a8;
+            border-radius:10px;
+            background:#fff0f0;
+            color:#9c2525;
+            font-size:14px;
+            line-height:1.5;
+        }
+
+        .error-message.show{
+            display:block;
+        }
+
+        .bottom-logo{
+            display:flex;
+            justify-content:center;
+            margin-top:24px;
+        }
+
+        .bottom-logo img{
+            display:block;
+            width:150px;
+            max-width:100%;
+            height:auto;
+            border-radius:8px;
+        }
+
+        @media(max-width:600px){
+            body{
+                padding:20px 14px;
+            }
+
+            .page-wrapper{
+                min-height:calc(100vh - 40px);
+            }
+
+            .content{
+                padding:25px 22px 28px;
+            }
+
+            .top-header{
+                align-items:flex-start;
+            }
+
+            .top-logo img{
+                width:125px;
+            }
+
+            h1{
+                font-size:25px;
+            }
+
+            #challengeDescription{
+                font-size:16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+    <main class="container">
+
+        <div class="accent-bar"></div>
+
+        <div class="content">
+
+            <div class="top-header">
+
+                <div class="page-label">
+                    <h3>Challenge Details</h3>
+                </div>
+
+                <div class="top-logo">
+                    <img
+                        src="images/agent42_Labs_Logo.png"
+                        alt="Agent42 Labs Logo"
+                        onerror="this.style.display='none'"
+                    >
+                </div>
+
+                
+
+            </div>
+
+            <h1 id="challengeName"></h1>
+
+            <p id="challengeDescription"></p>
+
+            <div class="error-message" id="selectionError"></div>
+
+            <div class="upload-box">
+
+                <label class="upload-label" for="challengeFile">
+                    Upload your submission
+                </label>
+                <p class="upload-note">
+                    <strong>Note:</strong> Please upload an image, screenshot, or any supporting document as proof of completing your assigned challenge. Only valid evidence of task completion will be considered for verification.
+                </p>
+
+                <div class="file-input-wrapper">
+
+                    <input
+                        type="file"
+                        id="challengeFile"
+                        accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.zip,.rar"
+                    >
+
+                </div>
+
+                <div class="file-information" id="fileInformation">
+                    JPG, PNG, GIF, PDF, Word, PowerPoint, Excel, ZIP and RAR files are accepted.
+                </div>
+
+            </div>
+
+            <button
+                type="button"
+                class="submit-btn"
+                id="submitButton"
+                onclick="submitChallenge()"
+            >
+                Submit Challenge
+            </button>
+
+        </div>
+
+    </main>
+
+
+</div>
+
+<script>
+    const challenges = {
+        "Business Challenge Solver": {
+            description: "Complete a case study and present your solution."
+        },
+
+        "Community Contributor": {
+            description: "Contribute to an open-source project or knowledge-sharing initiative."
+        },
+
+        "Company Quiz Creator": {
+            description: "Create a LinkedIn poll or quiz."
+        },
+
+        "Webinar Champion": {
+            description: "Conduct a webinar for students, freshers, or beginners."
+        },
+
+        "Company Spotlight Post": {
+            description: "Company culture, learning experience, team achievements."
+        }
+    };
+
+    const challengeNameElement =
+        document.getElementById("challengeName");
+
+    const challengeDescriptionElement =
+        document.getElementById("challengeDescription");
+
+    const selectionErrorElement =
+        document.getElementById("selectionError");
+
+    const fileInput =
+        document.getElementById("challengeFile");
+
+    const fileInformation =
+        document.getElementById("fileInformation");
+
+    const submitButton =
+        document.getElementById("submitButton");
+
+    function getSelectedChallenge() {
+        const urlParameters =
+            new URLSearchParams(window.location.search);
+
+        const urlChallenge =
+            urlParameters.get("challenge");
+
+        const localStorageChallenge =
+            localStorage.getItem("selectedChallenge");
+
+        const sessionStorageChallenge =
+            sessionStorage.getItem("selectedChallenge");
+
+        return (
+            urlChallenge ||
+            localStorageChallenge ||
+            sessionStorageChallenge ||
+            ""
+        ).trim();
+    }
+
+    const selectedChallenge = getSelectedChallenge();
+
+    function displayChallenge() {
+        if (
+            selectedChallenge &&
+            Object.prototype.hasOwnProperty.call(
+                challenges,
+                selectedChallenge
+            )
+        ) {
+            challengeNameElement.textContent =
+                selectedChallenge;
+
+            challengeDescriptionElement.textContent =
+                challenges[selectedChallenge].description;
+
+            localStorage.setItem(
+                "selectedChallenge",
+                selectedChallenge
+            );
+
+            sessionStorage.setItem(
+                "selectedChallenge",
+                selectedChallenge
+            );
+
+            selectionErrorElement.classList.remove("show");
+
+            fileInput.disabled = false;
+            submitButton.disabled = false;
+
+            return;
+        }
+
+        challengeNameElement.textContent =
+            "No Challenge Selected";
+
+        challengeDescriptionElement.textContent = "";
+
+        selectionErrorElement.textContent =
+            "Please return to the Spin Challenge page, spin the wheel and press Continue.";
+
+        selectionErrorElement.classList.add("show");
+
+        fileInput.disabled = true;
+        submitButton.disabled = true;
+    }
+
+    fileInput.addEventListener("change", function () {
+        const file = fileInput.files[0];
+
+        if (!file) {
+            fileInformation.textContent =
+                "JPG, PNG, GIF, PDF, Word, PowerPoint, Excel, ZIP and RAR files are accepted.";
+
+            return;
+        }
+
+        const maximumFileSize =
+            20 * 1024 * 1024;
+
+        if (file.size > maximumFileSize) {
+            alert("The selected file must be smaller than 20 MB.");
+
+            fileInput.value = "";
+
+            fileInformation.textContent =
+                "JPG, PNG, GIF, PDF, Word, PowerPoint, Excel, ZIP and RAR files are accepted.";
+
+            return;
+        }
+
+        const fileSizeInMB =
+            (file.size / (1024 * 1024)).toFixed(2);
+
+        fileInformation.textContent =
+            "Selected file: " +
+            file.name +
+            " (" +
+            fileSizeInMB +
+            " MB)";
+    });
+
+    function submitChallenge() {
+        if (
+            !selectedChallenge ||
+            !challenges[selectedChallenge]
+        ) {
+            alert(
+                "No challenge was selected. Please return to the Spin Challenge page."
+            );
+
+            return;
+        }
+
+        const file =
+            fileInput.files[0];
+
+        if (!file) {
+            alert("Please upload your work.");
+
+            return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+
+        let progress =
+            parseInt(
+                localStorage.getItem("employeeProgress"),
+                10
+            );
+
+        if (Number.isNaN(progress)) {
+            progress = 0;
+        }
+
+        const completedChallenges =
+            JSON.parse(
+                localStorage.getItem("completedChallenges") ||
+                "[]"
+            );
+
+        if (
+            !completedChallenges.includes(
+                selectedChallenge
+            )
+        ) {
+            progress += 20;
+
+            if (progress > 100) {
+                progress = 100;
+            }
+
+            completedChallenges.push(
+                selectedChallenge
+            );
+
+            localStorage.setItem(
+                "completedChallenges",
+                JSON.stringify(completedChallenges)
+            );
+
+            localStorage.setItem(
+                "employeeProgress",
+                progress.toString()
+            );
+        }
+
+        localStorage.setItem(
+            "lastSubmittedChallenge",
+            selectedChallenge
+        );
+
+        localStorage.setItem(
+            "lastSubmittedFileName",
+            file.name
+        );
+
+        setTimeout(function () {
+            alert("Challenge submitted successfully!");
+
+            window.location.href = "success.html";
+        }, 500);
+    }
+
+    displayChallenge();
+</script>
+
+</body>
+</html>

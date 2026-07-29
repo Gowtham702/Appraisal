@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <title>Questions</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        ::selection {
+            background: #b9f2df;
+            color: #000;
+        }
+
+        /* TOP LOGO */
+        .top-logo {
+            width: 130px;
+            display: block;
+            margin-left: auto;
+            margin-bottom: 20px;
+        }
+
+        .top-logo img {
+            width: 130px;
+        }
+
+
+        /* FORM BOX */
+        .form-container {
+            width: 650px;
+            margin: 70px auto;
+            background: #e8f8f5;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
+        }
+
+
+        /* CONTENT */
+        .content {
+            text-align: left;
+        }
+
+
+        h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 15px;
+            resize: none;
+        }
+
+
+        button {
+            display: block;
+            margin: 25px auto;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            background: linear-gradient(to right,#22b573,#3298db);
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+
+        /* BOTTOM LOGO */
+        .bottom-logo {
+            text-align:center;
+            margin-top:20px;
+            padding-bottom:20px;
+        }
+
+        .bottom-logo img {
+            width:110px;
+        }
+
+    </style>
+
+
+    <script>
+
+        function goNext(event, next) {
+            event.preventDefault();
+            document.getElementById("q" + next).style.display = "block";
+        }
+
+        function goToQuestions2(event) {
+            event.preventDefault();
+            const textarea = document.querySelector("#q3 textarea");
+            if (!textarea || textarea.value.trim() === "") {
+                textarea.reportValidity();
+                return;
+            }
+            window.location.href = "questions2.html";
+        }
+
+    </script>
+
+</head>
+
+
+<body>
+
+
+
+<div class="form-container">
+
+
+
+<div class="content">
+
+
+    <div class="top-logo">
+        <img src="images/agent42_Labs_Logo.png" alt="Logo">
+    </div>
+
+        <div id="q1">
+            <h3>Question 1</h3>
+
+            <p>
+            What are your thoughts about Agent42 Labs.
+            </p>
+
+            <form onsubmit="goNext(event, 2)">
+                <textarea required placeholder="Give your answers..."></textarea>
+                <button type="submit">Next</button>
+            </form>
+        </div>
+
+
+
+        <div id="q2" style="display:none;">
+
+
+            <h3>Question 2</h3>
+
+            <p>
+            Reflecting on your interactions this year, share a specific instance where a client’s positive feedback or appreciation made you realize the direct impact your work has on their success.
+            </p>
+
+            <form onsubmit="goNext(event, 3)">
+                <textarea required placeholder="Give your answers..."></textarea>
+                <button type="submit">Next</button>
+            </form>
+
+        </div>
+
+
+
+
+        <div id="q3" style="display:none;">
+
+
+            <h3>Question 3</h3>
+
+
+            <p> 
+            Which specific technical tools or practical skills did you rely on most heavily this year to navigate your daily tasks effectively?
+            </p>
+
+            <form onsubmit="goToQuestions2(event)">
+                <textarea required placeholder="Give your answers..."></textarea>
+                <button type="submit">Submit</button>
+            </form>
+
+        </div>
+
+<div class="bottom-logo">
+
+<img src="images/agent42_Labs_Logo.png" alt="Logo">
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+</body>
+</html>

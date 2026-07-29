@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Appraisal Journey</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    overflow: hidden;
+}
+
+/* soft glow background */
+body::before {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(16,185,129,0.3), transparent);
+    top: -100px;
+    left: -100px;
+    filter: blur(80px);
+}
+
+/* main card */
+.card {
+    width: 650px;
+    padding: 50px;
+    border-radius: 20px;
+    background: rgba(239, 244, 243, 0.65);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* logo */
+.logo {
+    width: 150px;
+    margin-bottom: 25px;
+}
+
+/* title */
+h1 {
+    font-size: 34px;
+    font-weight: 600;
+    color: #065f46;
+    margin-bottom: 15px;
+}
+
+/* highlight content */
+.highlight-box {
+    background: linear-gradient(to right, #d1fae5, #a7f3d0);
+    padding: 22px;
+    border-radius: 12px;
+    margin: 25px 0;
+    font-size: 17px;
+    color: #061712;
+    line-height: 1.6;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+/* small info */
+.info-text {
+    font-size: 13px;
+    color: #03130e;
+    margin-bottom: 30px;
+    opacity: 0.85;
+}
+
+/* button */
+.cta-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    font-size: 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(16,185,129,0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cta-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(16,185,129,0.5);
+}
+
+.cta-btn:active {
+    transform: scale(0.97);
+}
+
+/* footer */
+.footer {
+    margin-top: 40px;
+    font-size: 14px;
+    color: #000000;
+    opacity: 0.8;
+}
+
+/* responsive */
+@media(max-width: 700px) {
+    .card {
+        width: 90%;
+        padding: 30px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .cta-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+    <!-- LOGO -->
+    <img src="images/agent42_Labs_Logo.png" class="logo" alt="Logo">
+
+    <!-- TITLE -->
+    <h1>Ready to Discover Your Appraisal Date?</h1>
+
+    <!-- CONTENT BOX -->
+    <div class="highlight-box">
+        Complete exciting challenges, earn points, and move closer to revealing your appraisal date.
+    </div>
+
+
+    <!-- BUTTON -->
+    <button class="cta-btn" onclick="goToSpin()">
+        🚀 Let's go...
+    </button>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        Thank you for being part of the Agent42 Labs Appraisal Journey.
+    </div>
+
+</div>
+
+<script>
+function goToSpin() {
+    window.location.href = "http://127.0.0.1:5500/frontend/employee.html";
+}
+</script>
+
+</body>
+</html>
