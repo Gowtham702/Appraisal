@@ -1,0 +1,7 @@
+target
+.idea
+.vscode
+.git
+*.log
+latest-startup-error.txt
+uploads

@@ -2,376 +2,844 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Spin Challenge</title>
+
 <style>
-  :root{
-    --green-1:#0b3d2e;
-    --green-2:#146c43;
-    --green-3:#1f9d5b;
-    --green-4:#4fbf80;
-    --mint-1:#eafaf1;
-    --mint-2:#d8f3e2;
-    --gold:#c9962c;
-    --ink:#122620;
-    --muted:#5c6b63;
-    --shadow: 0 28px 65px rgba(11,61,46,0.22);
-  }
+:root {
+    --green-1: #0b3d2e;
+    --green-2: #146c43;
+    --green-3: #1f9d5b;
+    --green-4: #4fbf80;
+    --mint-1: #eafaf1;
+    --mint-2: #d8f3e2;
+    --gold: #c9962c;
+    --ink: #122620;
+    --muted: #5c6b63;
+    --danger: #b42318;
+    --success: #067647;
+    --shadow: 0 28px 65px rgba(11, 61, 46, 0.22);
+}
 
-  *{ box-sizing:border-box; }
+* {
+    box-sizing: border-box;
+}
 
-  body{
-    font-family: 'Segoe UI', Arial, sans-serif;
-    margin:0;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:40px 20px;
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+
     background:
-      radial-gradient(circle at 12% 8%, rgba(31,157,91,0.20), transparent 42%),
-      radial-gradient(circle at 92% 88%, rgba(11,61,46,0.16), transparent 46%),
-      linear-gradient(160deg, #eef7f2, #e0f0e6);
-    color:var(--ink);
-    position:relative;
-    overflow-x:hidden;
-  }
+        radial-gradient(
+            circle at 12% 8%,
+            rgba(31, 157, 91, 0.20),
+            transparent 42%
+        ),
+        radial-gradient(
+            circle at 92% 88%,
+            rgba(11, 61, 46, 0.16),
+            transparent 46%
+        ),
+        linear-gradient(
+            160deg,
+            #eef7f2,
+            #e0f0e6
+        );
 
-  .container{
-    width:min(600px, 92vw);
-    margin:auto;
+    color: var(--ink);
+    position: relative;
+    overflow-x: hidden;
+}
+
+.container {
+    width: min(650px, 94vw);
+    margin: auto;
+
     background:
-      radial-gradient(circle at 100% 0%, rgba(79,191,128,0.22), transparent 55%),
-      radial-gradient(circle at 0% 100%, rgba(11,61,46,0.20), transparent 50%),
-      linear-gradient(165deg, var(--mint-1) 0%, var(--mint-2) 100%);
-    padding:0 34px 34px;
-    border-radius:24px;
-    box-shadow:var(--shadow), 0 0 0 1px rgba(20,108,67,0.16);
-    position:relative;
-    z-index:2;
-    overflow:hidden;
-    text-align:center;
-  }
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(79, 191, 128, 0.22),
+            transparent 55%
+        ),
+        radial-gradient(
+            circle at 0% 100%,
+            rgba(11, 61, 46, 0.20),
+            transparent 50%
+        ),
+        linear-gradient(
+            165deg,
+            var(--mint-1) 0%,
+            var(--mint-2) 100%
+        );
 
-  .accent-bar{
-    height:8px;
-    margin:0 -34px 26px;
-    background: linear-gradient(90deg, var(--green-1), var(--green-3), var(--green-4), var(--green-2));
-  }
+    padding: 0 34px 34px;
+    border-radius: 24px;
+    box-shadow:
+        var(--shadow),
+        0 0 0 1px rgba(20, 108, 67, 0.16);
 
-  .header-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:14px;
-    margin-bottom:6px;
-  }
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    text-align: center;
+}
 
-  .title-block{ text-align:left; }
+.accent-bar {
+    height: 8px;
+    margin: 0 -34px 26px;
 
-  .title-block h2{
-    font-size:28px;
-    margin:0 0 4px;
-    letter-spacing:0.2px;
-    color:var(--green-1);
-    font-family: Georgia, 'Times New Roman', serif;
-  }
+    background: linear-gradient(
+        90deg,
+        var(--green-1),
+        var(--green-3),
+        var(--green-4),
+        var(--green-2)
+    );
+}
 
-  .logo-top{ height:28px; flex-shrink:0; }
+.header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 6px;
+}
 
-  .subtitle{
-    color:var(--muted);
-    font-size:14.5px;
-    font-weight:700;
-    margin:6px 0 22px;
-    text-align:left;
-  }
+.title-block {
+    text-align: left;
+}
 
-  .logo-bottom-wrap{ margin-top:26px; display:flex; justify-content:center; }
-  .logo-bottom{ height:26px; opacity:0.85; }
+.title-block h2 {
+    font-size: 28px;
+    margin: 0 0 4px;
+    letter-spacing: 0.2px;
+    color: var(--green-1);
+    font-family: Georgia, "Times New Roman", serif;
+}
 
-  .stats{ display:flex; justify-content:center; gap:22px; margin-bottom:26px; }
-  .stat{
-    background: linear-gradient(135deg, #ffffff, var(--mint-2));
-    border:1px solid var(--green-4);
-    border-radius:14px;
-    padding:9px 22px;
-    font-weight:700;
-    font-size:15px;
-    color:var(--green-1);
-    box-shadow: 0 6px 14px rgba(20,108,67,0.14);
-  }
-  .stat span{ color:var(--green-2); }
+.logo-top {
+    height: 28px;
+    flex-shrink: 0;
+}
 
-  .wheel-wrap{ position:relative; width:300px; height:300px; margin:10px auto 32px; }
+.subtitle {
+    color: var(--muted);
+    font-size: 14.5px;
+    font-weight: 700;
+    margin: 6px 0 18px;
+    text-align: left;
+}
 
-  .wheel-glow{
-    position:absolute;
-    inset:-20px;
-    border-radius:50%;
-    background: radial-gradient(circle, rgba(79,191,128,0.35), transparent 70%);
+.employee-info {
+    padding: 11px 14px;
+    margin-bottom: 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(79, 191, 128, 0.65);
+    background: rgba(255, 255, 255, 0.58);
+    text-align: left;
+    font-size: 13px;
+    color: var(--green-1);
+}
+
+.employee-info strong {
+    color: var(--green-2);
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        var(--mint-2)
+    );
+
+    border: 1px solid var(--green-4);
+    border-radius: 14px;
+    padding: 9px 20px;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--green-1);
+
+    box-shadow:
+        0 6px 14px rgba(20, 108, 67, 0.14);
+}
+
+.stat span {
+    color: var(--green-2);
+}
+
+.status-message {
+    display: none;
+    margin: 0 auto 22px;
+    max-width: 500px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.status-message.show {
+    display: block;
+}
+
+.status-message.info {
+    color: #175cd3;
+    background: #eff8ff;
+    border: 1px solid #b2ddff;
+}
+
+.status-message.success {
+    color: var(--success);
+    background: #ecfdf3;
+    border: 1px solid #abefc6;
+}
+
+.status-message.error {
+    color: var(--danger);
+    background: #fef3f2;
+    border: 1px solid #fecdca;
+}
+
+.status-message.warning {
+    color: #93370d;
+    background: #fffaeb;
+    border: 1px solid #fedf89;
+}
+
+.wheel-wrap {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 10px auto 32px;
+}
+
+.wheel-glow {
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+
+    background: radial-gradient(
+        circle,
+        rgba(79, 191, 128, 0.35),
+        transparent 70%
+    );
+
     filter: blur(7px);
-    z-index:0;
-  }
+    z-index: 0;
+}
 
-  .pointer{
-    position:absolute;
-    top:-16px;
-    left:50%;
-    transform:translateX(-50%);
-    width:0;
-    height:0;
-    border-left:15px solid transparent;
-    border-right:15px solid transparent;
-    border-top:26px solid #111111;   /* Premium Black */
-    filter: drop-shadow(0 5px 8px rgba(0,0,0,0.45));
-    z-index:5;
-  }
-  .wheel-outer{
-    width:100%;
-    height:100%;
-    border-radius:50%;
-    padding:12px;
+.pointer {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
 
-    background:conic-gradient(
+    width: 0;
+    height: 0;
+
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 26px solid #111111;
+
+    filter:
+        drop-shadow(0 5px 8px rgba(0, 0, 0, 0.45));
+
+    z-index: 5;
+}
+
+.wheel-outer {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    padding: 12px;
+
+    background: conic-gradient(
         from 0deg,
-        #0B5D3B,
-        #1E7A4F,
-        #2E8B57,
-        #1E7A4F,
-        #0B5D3B
+        #0b5d3b,
+        #1e7a4f,
+        #2e8b57,
+        #1e7a4f,
+        #0b5d3b
     );
 
     box-shadow:
-        0 18px 40px rgba(11,61,46,0.24),
-        inset 0 0 0 2px rgba(255,255,255,0.65);
+        0 18px 40px rgba(11, 61, 46, 0.24),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.65);
 
-    position:relative;
-    z-index:1;
-  }
+    position: relative;
+    z-index: 1;
+}
 
-  #wheelCanvas{
-    display:block;
-    width:100%;
-    height:100%;
-    border-radius:50%;
-    background:#fff;
-    box-shadow: inset 0 0 16px rgba(0,0,0,0.16);
-    transition: transform 4.5s cubic-bezier(0.17, 0.88, 0.35, 1);
-  }
+#wheelCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #ffffff;
 
-  .hub{
-    position:absolute;
-    top:50%; left:50%;
-    width:58px; height:58px;
-    transform:translate(-50%,-50%);
-    border-radius:50%;
-    background: radial-gradient(circle at 35% 30%, #fff8e5, var(--gold) 75%);
-    box-shadow: 0 5px 14px rgba(0,0,0,0.32), inset 0 0 0 3px #fff;
-    z-index:4;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:11px;
-    font-weight:800;
-    color:var(--green-1);
-    letter-spacing:0.5px;
-  }
+    box-shadow:
+        inset 0 0 16px rgba(0, 0, 0, 0.16);
 
-  /* --- Progress bar (weekly challenge progress) --- */
-  .progress-wrap{
-    margin:0 auto 26px;
-    max-width:420px;
-    text-align:left;
-  }
+    transition:
+        transform 4.5s
+        cubic-bezier(0.17, 0.88, 0.35, 1);
+}
 
-  .progress-label-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:8px;
-    font-size:13.5px;
-    font-weight:700;
-    color:var(--green-1);
-  }
+.hub {
+    position: absolute;
+    top: 50%;
+    left: 50%;
 
-  .progress-label-row span.muted{
-    color:var(--muted);
-    font-weight:700;
-  }
+    width: 58px;
+    height: 58px;
 
-  .progress-track{
-    position:relative;
-    width:100%;
-    height:14px;
-    border-radius:20px;
-    background: linear-gradient(135deg, #ffffff, var(--mint-2));
-    border:1px solid var(--green-4);
-    box-shadow: inset 0 2px 5px rgba(11,61,46,0.18);
-    overflow:hidden;
-  }
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
 
-  .progress-fill{
-    height:100%;
-    width:0%;
-    border-radius:20px;
-    background: linear-gradient(90deg, var(--green-2), var(--green-3), var(--gold));
-    box-shadow: 0 0 10px rgba(31,157,91,0.55);
-    transition: width .7s cubic-bezier(0.17,0.88,0.35,1);
-    position:relative;
-  }
+    background: radial-gradient(
+        circle at 35% 30%,
+        #fff8e5,
+        var(--gold) 75%
+    );
 
-  .progress-fill::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.55), transparent);
+    box-shadow:
+        0 5px 14px rgba(0, 0, 0, 0.32),
+        inset 0 0 0 3px #ffffff;
+
+    z-index: 4;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--green-1);
+    letter-spacing: 0.5px;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        opacity 0.15s ease;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#spinBtn {
+    padding: 14px 52px;
+    font-size: 16px;
+    color: #f4fff8;
+    border-radius: 32px;
+
+    background: linear-gradient(
+        135deg,
+        var(--green-3),
+        var(--green-1)
+    );
+
+    box-shadow:
+        0 14px 28px rgba(11, 61, 46, 0.42),
+        inset 0 0 0 1px rgba(79, 191, 128, 0.4);
+
+    position: relative;
+    overflow: hidden;
+}
+
+#spinBtn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -60%;
+
+    width: 40%;
+    height: 100%;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+}
+
+#spinBtn:hover:not(:disabled)::after {
+    left: 130%;
+}
+
+#spinBtn:hover:not(:disabled) {
+    box-shadow:
+        0 18px 32px rgba(11, 61, 46, 0.52),
+        inset 0 0 0 1px rgba(79, 191, 128, 0.6);
+}
+
+.challenge-box {
+    margin-top: 22px;
+    min-height: 20px;
+    font-weight: 700;
+    color: var(--green-2);
+    font-size: 15.5px;
+}
+
+.deadline {
+    margin-top: 7px;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.progress-wrap {
+    margin: 28px auto 26px;
+    max-width: 420px;
+    text-align: left;
+}
+
+.progress-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--green-1);
+}
+
+.progress-label-row span.muted {
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.progress-track {
+    position: relative;
+    width: 100%;
+    height: 14px;
+    border-radius: 20px;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        var(--mint-2)
+    );
+
+    border: 1px solid var(--green-4);
+
+    box-shadow:
+        inset 0 2px 5px rgba(11, 61, 46, 0.18);
+
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 20px;
+
+    background: linear-gradient(
+        90deg,
+        var(--green-2),
+        var(--green-3),
+        var(--gold)
+    );
+
+    box-shadow:
+        0 0 10px rgba(31, 157, 91, 0.55);
+
+    transition:
+        width 0.7s
+        cubic-bezier(0.17, 0.88, 0.35, 1);
+
+    position: relative;
+}
+
+.progress-fill::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.55),
+        transparent
+    );
+
     transform: translateX(-100%);
     animation: shimmer 2.4s ease-in-out infinite;
-  }
+}
 
-  @keyframes shimmer{
-    0%{ transform: translateX(-100%); }
-    100%{ transform: translateX(100%); }
-  }
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
 
-  .progress-steps{
-    display:flex;
-    justify-content:space-between;
-    margin-top:8px;
-    padding:0 1px;
-  }
+    100% {
+        transform: translateX(100%);
+    }
+}
 
-  .progress-step{
-    width:20px; height:20px;
-    border-radius:50%;
-    background:#fff;
-    border:2px solid var(--green-4);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:10px;
-    font-weight:800;
-    color:var(--muted);
-    transition: all .3s ease;
-  }
+.progress-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding: 0 1px;
+}
 
-  .progress-step.done{
-    background: linear-gradient(135deg, var(--green-3), var(--green-1));
-    border-color:var(--green-1);
-    color:#f4fff8;
-    box-shadow: 0 3px 8px rgba(11,61,46,0.4);
-  }
+.progress-step {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
 
-  .progress-step.active{
-    border-color:var(--gold);
-    color:var(--gold);
-    box-shadow: 0 0 0 4px rgba(201,150,44,0.18);
-  }
-  /* --- end progress bar --- */
+    background: #ffffff;
+    border: 2px solid var(--green-4);
 
-  button{
-    border:none;
-    cursor:pointer;
-    font-weight:700;
-    letter-spacing:0.3px;
-    transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
-  }
-  button:active{ transform: scale(0.97); }
-  button:disabled{ opacity:0.55; cursor:not-allowed; }
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  #spinBtn{
-    padding:14px 52px;
-    font-size:16px;
-    color:#f4fff8;
-    border-radius:32px;
-    background: linear-gradient(135deg, var(--green-3), var(--green-1));
-    box-shadow: 0 14px 28px rgba(11,61,46,0.42), inset 0 0 0 1px rgba(79,191,128,0.4);
-    position:relative;
-    overflow:hidden;
-  }
-  #spinBtn::after{
-    content:"";
-    position:absolute;
-    top:0; left:-60%;
-    width:40%; height:100%;
-    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
-    transform:skewX(-20deg);
-    transition: left .6s ease;
-  }
-  #spinBtn:hover:not(:disabled)::after{ left:130%; }
-  #spinBtn:hover:not(:disabled){ box-shadow: 0 18px 32px rgba(11,61,46,0.52), inset 0 0 0 1px rgba(79,191,128,0.6); }
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--muted);
 
-  .challenge-box{ margin-top:22px; min-height:20px; font-weight:700; color:var(--green-2); font-size:15.5px; }
-  .progress{ margin-top:6px; font-size:13px; color:var(--muted); }
+    transition: all 0.3s ease;
+}
 
-  #finalMessage{ color:var(--gold); font-weight:800; margin-top:16px; min-height:20px; }
+.progress-step.done {
+    background: linear-gradient(
+        135deg,
+        var(--green-3),
+        var(--green-1)
+    );
 
-  #confettiCanvas{
-    position:fixed; top:0; left:0; width:100%; height:100%;
-    pointer-events:none; z-index:50;
-  }
+    border-color: var(--green-1);
+    color: #f4fff8;
 
-  .modal-overlay{
-    position:fixed; inset:0;
-    background:rgba(8,26,20,0.62);
+    box-shadow:
+        0 3px 8px rgba(11, 61, 46, 0.4);
+}
+
+.progress-step.active {
+    border-color: var(--gold);
+    color: var(--gold);
+
+    box-shadow:
+        0 0 0 4px rgba(201, 150, 44, 0.18);
+}
+
+.submission-section {
+    display: none;
+    margin: 26px auto 0;
+    max-width: 500px;
+    padding: 22px;
+
+    border-radius: 16px;
+    border: 1px solid var(--green-4);
+
+    background:
+        rgba(255, 255, 255, 0.72);
+
+    text-align: left;
+
+    box-shadow:
+        0 10px 24px rgba(11, 61, 46, 0.14);
+}
+
+.submission-section.show {
+    display: block;
+}
+
+.submission-section h3 {
+    margin: 0 0 8px;
+    color: var(--green-1);
+    font-size: 18px;
+}
+
+.submission-section p {
+    margin: 0 0 16px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.file-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--green-4);
+    background: #ffffff;
+    color: var(--ink);
+    margin-bottom: 14px;
+}
+
+#submitFileButton {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 24px;
+
+    background: linear-gradient(
+        135deg,
+        var(--green-3),
+        var(--green-1)
+    );
+
+    color: #ffffff;
+    font-size: 14px;
+
+    box-shadow:
+        0 10px 22px rgba(11, 61, 46, 0.30);
+}
+
+.completed-list {
+    margin: 24px auto 0;
+    max-width: 500px;
+    padding: 18px 20px;
+
+    border-radius: 14px;
+    border: 1px solid rgba(79, 191, 128, 0.65);
+    background: rgba(255, 255, 255, 0.55);
+
+    text-align: left;
+}
+
+.completed-list h3 {
+    margin: 0 0 10px;
+    color: var(--green-1);
+    font-size: 15px;
+}
+
+.completed-list ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.completed-list li {
+    margin-bottom: 6px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.completed-list .empty {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+#finalMessage {
+    color: var(--gold);
+    font-weight: 800;
+    margin-top: 16px;
+    min-height: 20px;
+}
+
+.logo-bottom-wrap {
+    margin-top: 26px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo-bottom {
+    height: 26px;
+    opacity: 0.85;
+}
+
+#confettiCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+    z-index: 50;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(8, 26, 20, 0.62);
     backdrop-filter: blur(2px);
-    display:flex; align-items:center; justify-content:center;
-    opacity:0; pointer-events:none;
-    transition:opacity .3s ease;
-    z-index:60;
-  }
-  .modal-overlay.show{ opacity:1; pointer-events:auto; }
 
-  .modal-box{
-    background: linear-gradient(160deg, #ffffff, var(--mint-2));
-    border-radius:20px;
-    padding:36px 32px 30px;
-    width:min(380px, 88vw);
-    text-align:center;
-    box-shadow:0 32px 75px rgba(0,0,0,0.42);
-    transform:translateY(18px) scale(0.96);
-    transition: transform .35s cubic-bezier(0.17,0.88,0.35,1);
-    border-top:5px solid var(--green-3);
-  }
-  .modal-overlay.show .modal-box{ transform:translateY(0) scale(1); }
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  .modal-icon{
-    width:64px; height:64px;
-    margin:0 auto 14px;
-    border-radius:50%;
-    background: linear-gradient(135deg, var(--gold), #e8c766);
-    display:flex; align-items:center; justify-content:center;
-    font-size:28px;
-    box-shadow: 0 10px 22px rgba(201,150,44,0.5);
-  }
+    opacity: 0;
+    pointer-events: none;
 
-  .modal-box h3{
-    margin:0 0 6px;
-    font-size:13px;
-    text-transform:uppercase;
-    letter-spacing:1.3px;
-    color:var(--muted);
-    font-weight:700;
-  }
+    transition:
+        opacity 0.3s ease;
 
-  .modal-box .challenge-name{
-    font-size:22px;
-    font-weight:800;
-    color:var(--green-1);
-    margin:4px 0 22px;
-    line-height:1.35;
-    font-family: Georgia, 'Times New Roman', serif;
-  }
+    z-index: 60;
+}
 
-  #continueBtn{
-    padding:13px 36px;
-    font-size:15px;
-    color:#f4fff8;
-    border-radius:28px;
-    background: linear-gradient(135deg, var(--green-3), var(--green-1));
-    box-shadow: 0 14px 26px rgba(11,61,46,0.42);
-    width:100%;
-  }
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-box {
+    background: linear-gradient(
+        160deg,
+        #ffffff,
+        var(--mint-2)
+    );
+
+    border-radius: 20px;
+    padding: 36px 32px 30px;
+
+    width: min(380px, 88vw);
+    text-align: center;
+
+    box-shadow:
+        0 32px 75px rgba(0, 0, 0, 0.42);
+
+    transform:
+        translateY(18px)
+        scale(0.96);
+
+    transition:
+        transform 0.35s
+        cubic-bezier(0.17, 0.88, 0.35, 1);
+
+    border-top: 5px solid var(--green-3);
+}
+
+.modal-overlay.show .modal-box {
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+.modal-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 14px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        var(--gold),
+        #e8c766
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+
+    box-shadow:
+        0 10px 22px rgba(201, 150, 44, 0.5);
+}
+
+.modal-box h3 {
+    margin: 0 0 6px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.modal-box .challenge-name {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--green-1);
+    margin: 4px 0 10px;
+    line-height: 1.35;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.modal-deadline {
+    margin: 0 0 22px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+#continueBtn {
+    padding: 13px 36px;
+    font-size: 15px;
+    color: #f4fff8;
+    border-radius: 28px;
+
+    background: linear-gradient(
+        135deg,
+        var(--green-3),
+        var(--green-1)
+    );
+
+    box-shadow:
+        0 14px 26px rgba(11, 61, 46, 0.42);
+
+    width: 100%;
+}
+
+@media (max-width: 700px) {
+    body {
+        padding: 20px 12px;
+        align-items: flex-start;
+    }
+
+    .container {
+        width: 100%;
+        padding: 0 20px 28px;
+    }
+
+    .accent-bar {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+
+    .wheel-wrap {
+        width: 270px;
+        height: 270px;
+    }
+
+    .title-block h2 {
+        font-size: 24px;
+    }
+
+    .stats {
+        gap: 10px;
+    }
+
+    .stat {
+        padding: 8px 14px;
+    }
+}
 </style>
 </head>
 
@@ -381,326 +849,1660 @@
 
 <div class="container">
 
-  <div class="accent-bar"></div>
+    <div class="accent-bar"></div>
 
-  <div class="header-row">
-    <div class="title-block">
-      <h2>Spin Challenge</h2>
+    <div class="header-row">
+
+        <div class="title-block">
+            <h2>Spin Challenge</h2>
+        </div>
+
+        <img
+            src="images/agent42_Labs_Logo.png"
+            class="logo-top"
+            alt="Agent42 Labs"
+            onerror="this.style.display='none'"
+        >
+
     </div>
-    <img src="images/agent42_Labs_Logo.png" class="logo-top" onerror="this.style.display='none'">
-  </div>
 
-  <p class="subtitle">Complete challenges to earn points and unlock your appraisal date.</p>
+    <p class="subtitle">
+        Complete challenges to earn points and unlock your appraisal date.
+    </p>
 
-  <div class="stats">
-    <div class="stat">Week: <span id="week">1</span></div>
-    <div class="stat">Points: <span id="points">0</span></div>
-  </div>
+    <div class="employee-info">
 
-  <div class="wheel-wrap">
-    <div class="wheel-glow"></div>
-    <div class="pointer"></div>
-    <div class="wheel-outer">
-      <canvas id="wheelCanvas" width="600" height="600"></canvas>
+        Employee:
+        <strong id="employeeNameDisplay">Loading...</strong>
+
+        &nbsp; | &nbsp;
+
+        Employee ID:
+        <strong id="employeeIdDisplay">Loading...</strong>
+
     </div>
-    <div class="hub">SPIN</div>
-  </div>
 
-  <button id="spinBtn" onclick="spin()">SPIN</button>
+    <div class="stats">
 
-  <div class="challenge-box" id="challenge"></div>
-  <div class="progress" id="deadline"></div>
+        <div class="stat">
+            Week:
+            <span id="week">1</span>
+        </div>
 
-  <!-- Weekly progress bar -->
-  <div class="progress-wrap">
-    <div class="progress-label-row">
-      <span>Overall Progress</span>
-      <span class="muted" id="progressText">Week 1 of 5</span>
+        <div class="stat">
+            Points:
+            <span id="points">0</span>
+        </div>
+
+        <div class="stat">
+            Completed:
+            <span id="completedCount">0/5</span>
+        </div>
+
     </div>
-    <div class="progress-track">
-      <div class="progress-fill" id="progressFill"></div>
+
+    <div
+        id="weeklyMessage"
+        class="status-message"
+    ></div>
+
+    <div class="wheel-wrap">
+
+        <div class="wheel-glow"></div>
+
+        <div class="pointer"></div>
+
+        <div class="wheel-outer">
+
+            <canvas
+                id="wheelCanvas"
+                width="600"
+                height="600"
+            ></canvas>
+
+        </div>
+
+        <div class="hub">
+            SPIN
+        </div>
+
     </div>
-    <div class="progress-steps" id="progressSteps"></div>
-  </div>
-  <!-- end weekly progress bar -->
 
-  <p id="finalMessage"></p>
+    <button
+        id="spinBtn"
+        type="button"
+    >
+        SPIN
+    </button>
 
-  <div class="logo-bottom-wrap">
-    <img src="images/agent42_Labs_Logo.png" class="logo-bottom" onerror="this.style.display='none'">
-  </div>
+    <div
+        class="challenge-box"
+        id="challenge"
+    ></div>
+
+    <div
+        class="deadline"
+        id="deadline"
+    ></div>
+
+    <div class="progress-wrap">
+
+        <div class="progress-label-row">
+
+            <span>
+                Overall Progress
+            </span>
+
+            <span
+                class="muted"
+                id="progressText"
+            >
+                0 of 5 completed
+            </span>
+
+        </div>
+
+        <div class="progress-track">
+
+            <div
+                class="progress-fill"
+                id="progressFill"
+            ></div>
+
+        </div>
+
+        <div
+            class="progress-steps"
+            id="progressSteps"
+        ></div>
+
+    </div>
+
+    <div
+        id="submissionSection"
+        class="submission-section"
+    >
+
+        <h3>
+            Upload Your Challenge Submission
+        </h3>
+
+        <p>
+            Upload an image, screenshot, or PDF as confirmation
+            that you completed the assigned task. The submission
+            will close after Friday.
+        </p>
+
+        <input
+            type="file"
+            id="challengeFile"
+            class="file-input"
+            accept=".png,.jpg,.jpeg,.pdf"
+        >
+
+        <button
+            type="button"
+            id="submitFileButton"
+        >
+            Submit Challenge
+        </button>
+
+    </div>
+
+    <div class="completed-list">
+
+        <h3>
+            Completed Challenges
+        </h3>
+
+        <div id="completedChallenges">
+            <span class="empty">
+                No challenges completed yet.
+            </span>
+        </div>
+
+    </div>
+
+    <p id="finalMessage"></p>
+
+    <div class="logo-bottom-wrap">
+
+        <img
+            src="images/agent42_Labs_Logo.png"
+            class="logo-bottom"
+            alt="Agent42 Labs"
+            onerror="this.style.display='none'"
+        >
+
+    </div>
+
 </div>
 
-<!-- Result Modal -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal-box">
-    <div class="modal-icon">🎯</div>
-    <h3>Your Challenge</h3>
-    <div class="challenge-name" id="modalChallengeName"></div>
-    <button id="continueBtn" onclick="goToNextPage()">Continue</button>
-  </div>
+<div
+    class="modal-overlay"
+    id="modalOverlay"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-icon">
+            🎯
+        </div>
+
+        <h3>
+            Your Challenge
+        </h3>
+
+        <div
+            class="challenge-name"
+            id="modalChallengeName"
+        ></div>
+
+        <p
+            class="modal-deadline"
+            id="modalDeadline"
+        ></p>
+
+        <button
+            id="continueBtn"
+            type="button"
+        >
+            Continue
+        </button>
+
+    </div>
+
 </div>
 
 <script>
+/*
+========================================================
+BACKEND URL
+========================================================
 
-const challenges = [
-  "Business Challenge Solver",
-  "Community Contributor",
-  "Company Quiz Creator",
-  "Webinar Champion",
-  "Company Spotlight Post"
+Use this URL while testing locally:
+
+http://localhost:8081/api
+
+After deploying your Spring Boot backend, replace it with:
+
+https://your-backend-domain.com/api
+*/
+
+const API_BASE = "http://localhost:8081/api";
+
+/*
+========================================================
+EMPLOYEE INFORMATION
+========================================================
+*/
+
+const employeeId =
+    localStorage.getItem("appraisalEmployeeId");
+
+const employeeName =
+    localStorage.getItem("appraisalEmployeeName");
+
+if (!employeeId) {
+    window.location.href = "employee.html";
+}
+
+document.getElementById("employeeIdDisplay").textContent =
+    employeeId || "Not available";
+
+document.getElementById("employeeNameDisplay").textContent =
+    employeeName || "Employee";
+
+/*
+========================================================
+CHALLENGE CONFIGURATION
+========================================================
+*/
+
+const ALL_CHALLENGES = [
+    "Business Challenge Solver",
+    "Community Contributor",
+    "Company Quiz Creator",
+    "Webinar Champion",
+    "Company Spotlight Post"
 ];
 
-const wheelColors = [
-  "#A8D5BA", 
-  "#F3D9A3", 
-  "#B8CBE8", 
-  "#E6B8C4", 
-  "#AEE4D4"  
+const WHEEL_COLORS = [
+    "#A8D5BA",
+    "#F3D9A3",
+    "#B8CBE8",
+    "#E6B8C4",
+    "#AEE4D4"
 ];
 
-const canvas = document.getElementById("wheelCanvas");
-const ctx = canvas.getContext("2d");
-const segAngle = (2 * Math.PI) / challenges.length;
-const segAngleDeg = 360 / challenges.length;
+const TOTAL_CHALLENGES = 5;
+
 const POINTER_ANGLE_DEG = 270;
 
-function drawWheel(){
-  const cx = canvas.width / 2;
-  const cy = canvas.height / 2;
-  const radius = canvas.width / 2;
+let availableChallenges = [...ALL_CHALLENGES];
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+let currentChallenge = "";
 
-  challenges.forEach((label, i) => {
-    const start = i * segAngle;
-    const end = start + segAngle;
+let currentRotation = 0;
 
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.arc(cx, cy, radius, start, end);
-    ctx.closePath();
-    ctx.fillStyle = wheelColors[i % wheelColors.length];
-    ctx.fill();
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = "#fdf6e3";
-    ctx.stroke();
+let spinning = false;
 
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.rotate(start + segAngle / 2);
-    ctx.textAlign = "right";
-    ctx.fillStyle = "#1F3D32";
-    ctx.font = "700 22px Segoe UI, Arial";
-    ctx.shadowColor = "rgba(0,0,0,0.3)";
-    ctx.shadowBlur = 3;
-    wrapText(ctx, label, radius - 30, 8, 150, 24);
-    ctx.restore();
-  });
-}
+let statusLoading = false;
 
-function wrapText(ctx, text, x, y, maxWidth, lineHeight){
-  const words = text.split(" ");
-  let line = "";
-  let lines = [];
-  for(let n = 0; n < words.length; n++){
-    const testLine = line + words[n] + " ";
-    if(ctx.measureText(testLine).width > maxWidth && n > 0){
-      lines.push(line);
-      line = words[n] + " ";
-    } else {
-      line = testLine;
+/*
+========================================================
+PAGE ELEMENTS
+========================================================
+*/
+
+const canvas =
+    document.getElementById("wheelCanvas");
+
+const ctx =
+    canvas.getContext("2d");
+
+const spinButton =
+    document.getElementById("spinBtn");
+
+const weeklyMessage =
+    document.getElementById("weeklyMessage");
+
+const challengeElement =
+    document.getElementById("challenge");
+
+const deadlineElement =
+    document.getElementById("deadline");
+
+const submissionSection =
+    document.getElementById("submissionSection");
+
+const submitFileButton =
+    document.getElementById("submitFileButton");
+
+const challengeFile =
+    document.getElementById("challengeFile");
+
+const completedChallengesElement =
+    document.getElementById("completedChallenges");
+
+const modalOverlay =
+    document.getElementById("modalOverlay");
+
+const modalChallengeName =
+    document.getElementById("modalChallengeName");
+
+const modalDeadline =
+    document.getElementById("modalDeadline");
+
+const continueButton =
+    document.getElementById("continueBtn");
+
+/*
+========================================================
+WHEEL DRAWING
+========================================================
+*/
+
+function drawWheel() {
+
+    const cx =
+        canvas.width / 2;
+
+    const cy =
+        canvas.height / 2;
+
+    const radius =
+        canvas.width / 2;
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    if (availableChallenges.length === 0) {
+
+        ctx.beginPath();
+
+        ctx.arc(
+            cx,
+            cy,
+            radius,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle = "#d8f3e2";
+        ctx.fill();
+
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "#146c43";
+        ctx.stroke();
+
+        ctx.fillStyle = "#0b3d2e";
+        ctx.font =
+            "700 30px Segoe UI, Arial";
+
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        ctx.fillText(
+            "All Challenges",
+            cx,
+            cy - 18
+        );
+
+        ctx.fillText(
+            "Completed",
+            cx,
+            cy + 25
+        );
+
+        return;
     }
-  }
-  lines.push(line);
-  const offset = -((lines.length - 1) * lineHeight) / 2;
-  lines.forEach((l, i) => {
-    ctx.fillText(l.trim(), x, y + offset + i * lineHeight);
-  });
+
+    const segmentAngle =
+        (Math.PI * 2) /
+        availableChallenges.length;
+
+    availableChallenges.forEach(
+        function (label, index) {
+
+            const start =
+                index * segmentAngle;
+
+            const end =
+                start + segmentAngle;
+
+            ctx.beginPath();
+
+            ctx.moveTo(cx, cy);
+
+            ctx.arc(
+                cx,
+                cy,
+                radius,
+                start,
+                end
+            );
+
+            ctx.closePath();
+
+            ctx.fillStyle =
+                WHEEL_COLORS[
+                    index %
+                    WHEEL_COLORS.length
+                ];
+
+            ctx.fill();
+
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = "#fdf6e3";
+            ctx.stroke();
+
+            ctx.save();
+
+            ctx.translate(cx, cy);
+
+            ctx.rotate(
+                start +
+                segmentAngle / 2
+            );
+
+            ctx.textAlign = "right";
+            ctx.textBaseline = "middle";
+
+            ctx.fillStyle = "#1f3d32";
+
+            ctx.font =
+                availableChallenges.length <= 3
+                    ? "700 25px Segoe UI, Arial"
+                    : "700 22px Segoe UI, Arial";
+
+            ctx.shadowColor =
+                "rgba(0,0,0,0.20)";
+
+            ctx.shadowBlur = 3;
+
+            wrapText(
+                ctx,
+                label,
+                radius - 32,
+                0,
+                165,
+                25
+            );
+
+            ctx.restore();
+        }
+    );
 }
+
+function wrapText(
+    context,
+    text,
+    x,
+    y,
+    maxWidth,
+    lineHeight
+) {
+
+    const words =
+        text.split(" ");
+
+    let line = "";
+
+    const lines = [];
+
+    words.forEach(
+        function (word, index) {
+
+            const testLine =
+                line + word + " ";
+
+            if (
+                context
+                    .measureText(testLine)
+                    .width >
+                    maxWidth &&
+                index > 0
+            ) {
+
+                lines.push(line.trim());
+
+                line =
+                    word + " ";
+
+            } else {
+
+                line =
+                    testLine;
+            }
+        }
+    );
+
+    lines.push(line.trim());
+
+    const startingOffset =
+        -(
+            (lines.length - 1) *
+            lineHeight
+        ) / 2;
+
+    lines.forEach(
+        function (currentLine, index) {
+
+            context.fillText(
+                currentLine,
+                x,
+                y +
+                    startingOffset +
+                    index *
+                    lineHeight
+            );
+        }
+    );
+}
+
+/*
+========================================================
+PROGRESS BAR
+========================================================
+*/
+
+function initialiseProgressSteps() {
+
+    const stepsWrapper =
+        document.getElementById(
+            "progressSteps"
+        );
+
+    stepsWrapper.innerHTML = "";
+
+    for (
+        let index = 1;
+        index <= TOTAL_CHALLENGES;
+        index++
+    ) {
+
+        const step =
+            document.createElement("div");
+
+        step.className =
+            "progress-step";
+
+        step.id =
+            "progressStep" + index;
+
+        step.textContent =
+            index;
+
+        stepsWrapper.appendChild(step);
+    }
+}
+
+function updateProgressBar(completedCount) {
+
+    const safeCompletedCount =
+        Math.min(
+            Math.max(
+                Number(completedCount) || 0,
+                0
+            ),
+            TOTAL_CHALLENGES
+        );
+
+    const percentage =
+        (
+            safeCompletedCount /
+            TOTAL_CHALLENGES
+        ) * 100;
+
+    document
+        .getElementById("progressFill")
+        .style.width =
+            percentage + "%";
+
+    document
+        .getElementById("progressText")
+        .textContent =
+            safeCompletedCount +
+            " of " +
+            TOTAL_CHALLENGES +
+            " completed";
+
+    document
+        .getElementById("completedCount")
+        .textContent =
+            safeCompletedCount +
+            "/" +
+            TOTAL_CHALLENGES;
+
+    for (
+        let index = 1;
+        index <= TOTAL_CHALLENGES;
+        index++
+    ) {
+
+        const step =
+            document.getElementById(
+                "progressStep" + index
+            );
+
+        if (!step) {
+            continue;
+        }
+
+        step.classList.remove(
+            "done",
+            "active"
+        );
+
+        if (index <= safeCompletedCount) {
+
+            step.classList.add("done");
+
+        } else if (
+            index ===
+            safeCompletedCount + 1
+        ) {
+
+            step.classList.add(
+                "active"
+            );
+        }
+    }
+}
+
+/*
+========================================================
+STATUS MESSAGE
+========================================================
+*/
+
+function showMessage(
+    message,
+    type = "info"
+) {
+
+    weeklyMessage.textContent =
+        message || "";
+
+    weeklyMessage.className =
+        "status-message show " +
+        type;
+}
+
+function hideMessage() {
+
+    weeklyMessage.textContent = "";
+
+    weeklyMessage.className =
+        "status-message";
+}
+
+/*
+========================================================
+BACKEND STATUS
+========================================================
+*/
+
+async function loadWeeklyStatus() {
+
+    if (statusLoading) {
+        return;
+    }
+
+    statusLoading = true;
+
+    spinButton.disabled = true;
+
+    showMessage(
+        "Loading your weekly challenge status...",
+        "info"
+    );
+
+    try {
+
+        const response =
+            await fetch(
+                API_BASE +
+                "/weekly-challenges/" +
+                encodeURIComponent(employeeId) +
+                "/status"
+            );
+
+        let status;
+
+        try {
+
+            status =
+                await response.json();
+
+        } catch (jsonError) {
+
+            throw new Error(
+                "The backend returned an invalid response."
+            );
+        }
+
+        if (!response.ok) {
+
+            throw new Error(
+                status.message ||
+                "Unable to load challenge status."
+            );
+        }
+
+        applyStatus(status);
+
+    } catch (error) {
+
+        console.error(error);
+
+        spinButton.disabled = true;
+
+        showMessage(
+            error.message ===
+                "Failed to fetch"
+                ? "Unable to connect to the backend. Make sure Spring Boot is running on port 8081."
+                : error.message,
+            "error"
+        );
+
+    } finally {
+
+        statusLoading = false;
+    }
+}
+
+function applyStatus(status) {
+
+    const completedCount =
+        Number(
+            status.completedCount
+        ) || 0;
+
+    const totalPoints =
+        Number(
+            status.totalPoints
+        ) || 0;
+
+    document
+        .getElementById("points")
+        .textContent =
+            totalPoints;
+
+    updateProgressBar(
+        completedCount
+    );
+
+    updateWeekNumber(
+        completedCount
+    );
+
+    availableChallenges =
+        Array.isArray(
+            status.availableChallenges
+        )
+            ? status.availableChallenges
+            : [];
+
+    drawWheel();
+
+    displayCompletedChallenges(
+        status.completedChallenges
+    );
+
+    spinButton.disabled =
+        !status.canSpin;
+
+    submissionSection.classList.toggle(
+        "show",
+        Boolean(status.canSubmit)
+    );
+
+    if (
+        status.currentChallengeName
+    ) {
+
+        currentChallenge =
+            status.currentChallengeName;
+
+        challengeElement.textContent =
+            "Your Challenge: " +
+            status.currentChallengeName;
+
+        deadlineElement.textContent =
+            status.dueAt
+                ? "Submission deadline: " +
+                  formatDate(status.dueAt)
+                : "";
+
+    } else {
+
+        currentChallenge = "";
+
+        challengeElement.textContent = "";
+
+        deadlineElement.textContent = "";
+    }
+
+    if (
+        status.allChallengesCompleted
+    ) {
+
+        spinButton.style.display =
+            "none";
+
+        submissionSection.classList.remove(
+            "show"
+        );
+
+        document
+            .getElementById("finalMessage")
+            .textContent =
+                "Congratulations! You have completed all five challenges and earned 100 points.";
+
+        showMessage(
+            status.message ||
+            "All challenges have been completed.",
+            "success"
+        );
+
+        return;
+    }
+
+    spinButton.style.display =
+        "inline-block";
+
+    document
+        .getElementById("finalMessage")
+        .textContent = "";
+
+    let messageType = "info";
+
+    const message =
+        String(
+            status.message || ""
+        ).toLowerCase();
+
+    if (
+        message.includes("completed")
+    ) {
+
+        messageType = "success";
+
+    } else if (
+        message.includes("deadline") ||
+        message.includes("passed") ||
+        message.includes("closed")
+    ) {
+
+        messageType = "warning";
+    }
+
+    showMessage(
+        status.message ||
+        "Challenge status loaded.",
+        messageType
+    );
+}
+
+function updateWeekNumber(
+    completedCount
+) {
+
+    const currentWeek =
+        Math.min(
+            completedCount + 1,
+            TOTAL_CHALLENGES
+        );
+
+    document
+        .getElementById("week")
+        .textContent =
+            currentWeek;
+}
+
+function displayCompletedChallenges(
+    completedChallenges
+) {
+
+    if (
+        !Array.isArray(
+            completedChallenges
+        ) ||
+        completedChallenges.length === 0
+    ) {
+
+        completedChallengesElement.innerHTML =
+            '<span class="empty">' +
+            "No challenges completed yet." +
+            "</span>";
+
+        return;
+    }
+
+    const list =
+        document.createElement("ul");
+
+    completedChallenges.forEach(
+        function (challengeName) {
+
+            const item =
+                document.createElement("li");
+
+            item.textContent =
+                challengeName;
+
+            list.appendChild(item);
+        }
+    );
+
+    completedChallengesElement.innerHTML = "";
+
+    completedChallengesElement.appendChild(
+        list
+    );
+}
+
+/*
+========================================================
+SPIN REQUEST
+========================================================
+*/
+
+spinButton.addEventListener(
+    "click",
+    requestSpin
+);
+
+async function requestSpin() {
+
+    if (
+        spinning ||
+        spinButton.disabled
+    ) {
+        return;
+    }
+
+    spinning = true;
+
+    spinButton.disabled = true;
+
+    challengeElement.textContent = "";
+
+    deadlineElement.textContent = "";
+
+    document
+        .getElementById("finalMessage")
+        .textContent = "";
+
+    showMessage(
+        "Selecting your weekly challenge...",
+        "info"
+    );
+
+    try {
+
+        const response =
+            await fetch(
+                API_BASE +
+                "/weekly-challenges/" +
+                encodeURIComponent(employeeId) +
+                "/spin",
+                {
+                    method: "POST",
+                    headers: {
+                        "Accept":
+                            "application/json"
+                    }
+                }
+            );
+
+        let result;
+
+        try {
+
+            result =
+                await response.json();
+
+        } catch (jsonError) {
+
+            throw new Error(
+                "The backend returned an invalid response."
+            );
+        }
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.message ||
+                "The wheel cannot be spun."
+            );
+        }
+
+        if (
+            !result.challengeName
+        ) {
+
+            throw new Error(
+                "No challenge was returned by the backend."
+            );
+        }
+
+        currentChallenge =
+            result.challengeName;
+
+        await animateWheelToChallenge(
+            result.challengeName
+        );
+
+        challengeElement.textContent =
+            "Your Challenge: " +
+            result.challengeName;
+
+        deadlineElement.textContent =
+            result.dueAt
+                ? "Submission deadline: " +
+                  formatDate(result.dueAt)
+                : "Complete and submit the task before Friday.";
+
+        submissionSection.classList.add(
+            "show"
+        );
+
+        showMessage(
+            result.message ||
+            "Your weekly challenge has been assigned.",
+            "success"
+        );
+
+        launchConfetti();
+
+        showModal(
+            result.challengeName,
+            result.dueAt
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            error.message ===
+                "Failed to fetch"
+                ? "Unable to connect to the backend. Make sure Spring Boot is running."
+                : error.message,
+            "error"
+        );
+
+        await loadWeeklyStatus();
+
+    } finally {
+
+        spinning = false;
+    }
+}
+
+/*
+========================================================
+ANIMATE TO BACKEND-SELECTED CHALLENGE
+========================================================
+*/
+
+function animateWheelToChallenge(
+    selectedChallenge
+) {
+
+    return new Promise(
+        function (resolve, reject) {
+
+            const selectedIndex =
+                availableChallenges.indexOf(
+                    selectedChallenge
+                );
+
+            if (selectedIndex === -1) {
+
+                reject(
+                    new Error(
+                        "The assigned challenge is not available on the current wheel."
+                    )
+                );
+
+                return;
+            }
+
+            const segmentAngleDegree =
+                360 /
+                availableChallenges.length;
+
+            const selectedSegmentCentre =
+                selectedIndex *
+                segmentAngleDegree +
+                segmentAngleDegree / 2;
+
+            const desiredRotation =
+                POINTER_ANGLE_DEG -
+                selectedSegmentCentre;
+
+            const normalisedCurrentRotation =
+                (
+                    (
+                        currentRotation %
+                        360
+                    ) +
+                    360
+                ) %
+                360;
+
+            const normalisedDesiredRotation =
+                (
+                    (
+                        desiredRotation %
+                        360
+                    ) +
+                    360
+                ) %
+                360;
+
+            const rotationDifference =
+                (
+                    normalisedDesiredRotation -
+                    normalisedCurrentRotation +
+                    360
+                ) %
+                360;
+
+            const fullRotations =
+                6 * 360;
+
+            currentRotation =
+                currentRotation +
+                fullRotations +
+                rotationDifference;
+
+            canvas.style.transform =
+                "rotate(" +
+                currentRotation +
+                "deg)";
+
+            window.setTimeout(
+                function () {
+                    resolve();
+                },
+                4600
+            );
+        }
+    );
+}
+
+/*
+========================================================
+FILE SUBMISSION
+========================================================
+*/
+
+submitFileButton.addEventListener(
+    "click",
+    submitChallengeFile
+);
+
+async function submitChallengeFile() {
+
+    if (
+        !challengeFile.files ||
+        challengeFile.files.length === 0
+    ) {
+
+        showMessage(
+            "Please select an image, screenshot, or PDF before submitting.",
+            "warning"
+        );
+
+        return;
+    }
+
+    const selectedFile =
+        challengeFile.files[0];
+
+    const maximumFileSize =
+        10 * 1024 * 1024;
+
+    const allowedTypes = [
+        "image/png",
+        "image/jpeg",
+        "application/pdf"
+    ];
+
+    if (
+        selectedFile.size >
+        maximumFileSize
+    ) {
+
+        showMessage(
+            "The selected file is larger than 10 MB.",
+            "error"
+        );
+
+        return;
+    }
+
+    if (
+        selectedFile.type &&
+        !allowedTypes.includes(
+            selectedFile.type
+        )
+    ) {
+
+        showMessage(
+            "Only PNG, JPG, JPEG, and PDF files are allowed.",
+            "error"
+        );
+
+        return;
+    }
+
+    const formData =
+        new FormData();
+
+    formData.append(
+        "file",
+        selectedFile
+    );
+
+    submitFileButton.disabled = true;
+
+    showMessage(
+        "Uploading your challenge submission...",
+        "info"
+    );
+
+    try {
+
+        const response =
+            await fetch(
+                API_BASE +
+                "/weekly-challenges/" +
+                encodeURIComponent(employeeId) +
+                "/submit",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+        let result;
+
+        try {
+
+            result =
+                await response.json();
+
+        } catch (jsonError) {
+
+            throw new Error(
+                "The backend returned an invalid response."
+            );
+        }
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.message ||
+                "Challenge submission failed."
+            );
+        }
+
+        challengeFile.value = "";
+
+        submissionSection.classList.remove(
+            "show"
+        );
+
+        showMessage(
+            result.message ||
+            "Challenge submitted successfully.",
+            "success"
+        );
+
+        launchConfetti();
+
+        await loadWeeklyStatus();
+
+    } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            error.message ===
+                "Failed to fetch"
+                ? "Unable to connect to the backend."
+                : error.message,
+            "error"
+        );
+
+    } finally {
+
+        submitFileButton.disabled = false;
+    }
+}
+
+/*
+========================================================
+MODAL
+========================================================
+*/
+
+function showModal(
+    challengeName,
+    dueAt
+) {
+
+    modalChallengeName.textContent =
+        challengeName;
+
+    modalDeadline.textContent =
+        dueAt
+            ? "Submit before " +
+              formatDate(dueAt)
+            : "Complete and submit the task before Friday.";
+
+    modalOverlay.classList.add(
+        "show"
+    );
+}
+
+function closeModal() {
+
+    modalOverlay.classList.remove(
+        "show"
+    );
+}
+
+continueButton.addEventListener(
+    "click",
+    function () {
+
+        closeModal();
+
+        window.location.href =
+            "challenge-detail.html?challenge=" +
+            encodeURIComponent(
+                currentChallenge
+            );
+    }
+);
+
+/*
+========================================================
+DATE FORMAT
+========================================================
+*/
+
+function formatDate(value) {
+
+    if (!value) {
+        return "";
+    }
+
+    const parsedDate =
+        new Date(value);
+
+    if (
+        Number.isNaN(
+            parsedDate.getTime()
+        )
+    ) {
+        return value;
+    }
+
+    return parsedDate.toLocaleString(
+        "en-IN",
+        {
+            dateStyle: "medium",
+            timeStyle: "short"
+        }
+    );
+}
+
+/*
+========================================================
+CONFETTI
+========================================================
+*/
+
+const confettiCanvas =
+    document.getElementById(
+        "confettiCanvas"
+    );
+
+const confettiContext =
+    confettiCanvas.getContext("2d");
+
+let confettiParticles = [];
+
+let confettiRunning = false;
+
+const confettiColours = [
+    "#065f46",
+    "#c9962c",
+    "#1b2a4a",
+    "#7a2e3d",
+    "#0f9d78",
+    "#e8c766"
+];
+
+function resizeConfettiCanvas() {
+
+    confettiCanvas.width =
+        window.innerWidth;
+
+    confettiCanvas.height =
+        window.innerHeight;
+}
+
+window.addEventListener(
+    "resize",
+    resizeConfettiCanvas
+);
+
+function launchConfetti() {
+
+    confettiParticles = [];
+
+    const particleCount = 140;
+
+    for (
+        let index = 0;
+        index < particleCount;
+        index++
+    ) {
+
+        confettiParticles.push({
+            x:
+                Math.random() *
+                confettiCanvas.width,
+
+            y:
+                -20 -
+                Math.random() *
+                confettiCanvas.height *
+                0.3,
+
+            width:
+                6 +
+                Math.random() *
+                6,
+
+            height:
+                10 +
+                Math.random() *
+                8,
+
+            colour:
+                confettiColours[
+                    Math.floor(
+                        Math.random() *
+                        confettiColours.length
+                    )
+                ],
+
+            speedY:
+                2 +
+                Math.random() *
+                3.5,
+
+            speedX:
+                -1.5 +
+                Math.random() *
+                3,
+
+            rotation:
+                Math.random() *
+                360,
+
+            rotationSpeed:
+                -6 +
+                Math.random() *
+                12,
+
+            opacity: 1
+        });
+    }
+
+    if (!confettiRunning) {
+
+        confettiRunning = true;
+
+        requestAnimationFrame(
+            animateConfetti
+        );
+    }
+
+    window.setTimeout(
+        function () {
+            confettiRunning = false;
+        },
+        3600
+    );
+}
+
+function animateConfetti() {
+
+    confettiContext.clearRect(
+        0,
+        0,
+        confettiCanvas.width,
+        confettiCanvas.height
+    );
+
+    confettiParticles.forEach(
+        function (particle) {
+
+            particle.y +=
+                particle.speedY;
+
+            particle.x +=
+                particle.speedX;
+
+            particle.rotation +=
+                particle.rotationSpeed;
+
+            if (
+                particle.y >
+                confettiCanvas.height *
+                0.85
+            ) {
+
+                particle.opacity -=
+                    0.02;
+            }
+
+            confettiContext.save();
+
+            confettiContext.translate(
+                particle.x,
+                particle.y
+            );
+
+            confettiContext.rotate(
+                particle.rotation *
+                Math.PI /
+                180
+            );
+
+            confettiContext.globalAlpha =
+                Math.max(
+                    particle.opacity,
+                    0
+                );
+
+            confettiContext.fillStyle =
+                particle.colour;
+
+            confettiContext.fillRect(
+                -particle.width / 2,
+                -particle.height / 2,
+                particle.width,
+                particle.height
+            );
+
+            confettiContext.restore();
+        }
+    );
+
+    confettiParticles =
+        confettiParticles.filter(
+            function (particle) {
+
+                return (
+                    particle.opacity > 0 &&
+                    particle.y <
+                        confettiCanvas.height +
+                        30
+                );
+            }
+        );
+
+    if (
+        confettiRunning ||
+        confettiParticles.length > 0
+    ) {
+
+        requestAnimationFrame(
+            animateConfetti
+        );
+
+    } else {
+
+        confettiContext.clearRect(
+            0,
+            0,
+            confettiCanvas.width,
+            confettiCanvas.height
+        );
+    }
+}
+
+/*
+========================================================
+INITIALISE PAGE
+========================================================
+*/
+
+resizeConfettiCanvas();
+
+initialiseProgressSteps();
+
+updateProgressBar(0);
 
 drawWheel();
 
-let week = 1;
-let points = 0;
-let currentChallenge = "";
-let currentIndex = -1;
-let spinning = false;
-let currentRotation = 0;
-
-const TOTAL_WEEKS = 5;
-
-const spinBtn = document.getElementById("spinBtn");
-
-/* --- Progress bar setup & updater --- */
-function initProgressSteps(){
-  const stepsWrap = document.getElementById("progressSteps");
-  stepsWrap.innerHTML = "";
-  for(let i = 1; i <= TOTAL_WEEKS; i++){
-    const step = document.createElement("div");
-    step.className = "progress-step";
-    step.id = "step-" + i;
-    step.innerText = i;
-    stepsWrap.appendChild(step);
-  }
-}
-
-function updateProgressBar(){
-  const completedWeeks = Math.min(week - 1, TOTAL_WEEKS);
-  const pct = (completedWeeks / TOTAL_WEEKS) * 100;
-
-  document.getElementById("progressFill").style.width = pct + "%";
-
-  const displayWeek = Math.min(week, TOTAL_WEEKS);
-  document.getElementById("progressText").innerText =
-    week > TOTAL_WEEKS ? "All weeks complete!" : "Week " + displayWeek + " of " + TOTAL_WEEKS;
-
-  for(let i = 1; i <= TOTAL_WEEKS; i++){
-    const step = document.getElementById("step-" + i);
-    if(!step) continue;
-    step.classList.remove("done", "active");
-    if(i < week){
-      step.classList.add("done");
-    } else if(i === week){
-      step.classList.add("active");
-    }
-  }
-}
-
-initProgressSteps();
-updateProgressBar();
-/* --- end progress bar setup --- */
-
-function spin(){
-  if(spinning) return;
-
-  if(week > 5){
-    alert("All challenges completed");
-    return;
-  }
-
-  spinning = true;
-  spinBtn.disabled = true;
-
-  document.getElementById("finalMessage").innerHTML = "";
-  document.getElementById("challenge").innerHTML = "";
-  document.getElementById("deadline").innerHTML = "";
-
-  const fullSpins = 6;
-  const randomStopDeg = Math.random() * 360;
-
-  const currentMod = ((currentRotation % 360) + 360) % 360;
-  const delta = (randomStopDeg - currentMod + 360) % 360;
-  const finalRotation = currentRotation + fullSpins * 360 + delta;
-
-  canvas.style.transform = `rotate(${finalRotation}deg)`;
-  currentRotation = finalRotation;
-
-  setTimeout(() => {
-    spinning = false;
-    spinBtn.disabled = false;
-
-    const normalizedRotation = ((currentRotation % 360) + 360) % 360;
-    const originalAngleAtPointer =
-      ((POINTER_ANGLE_DEG - normalizedRotation) % 360 + 360) % 360;
-
-    const index = Math.floor(originalAngleAtPointer / segAngleDeg) % challenges.length;
-
-    currentIndex = index;
-    currentChallenge = challenges[index];
-
-    document.getElementById("challenge").innerHTML = "Your Challenge: " + currentChallenge;
-    document.getElementById("deadline").innerHTML = "Complete before Friday of this week";
-
-    launchConfetti();
-    showModal(currentChallenge);
-  }, 4600);
-}
-
-function showModal(name){
-  document.getElementById("modalChallengeName").innerText = name;
-  document.getElementById("modalOverlay").classList.add("show");
-}
-
-function closeModal(){
-  document.getElementById("modalOverlay").classList.remove("show");
-}
-
-function goToNextPage(){
-  closeModal();
-  window.location.href = "challenge-detail.html?challenge=" + encodeURIComponent(currentChallenge);
-}
-
-const confettiCanvas = document.getElementById("confettiCanvas");
-const cctx = confettiCanvas.getContext("2d");
-let confettiParticles = [];
-let confettiRunning = false;
-
-function resizeConfettiCanvas(){
-  confettiCanvas.width = window.innerWidth;
-  confettiCanvas.height = window.innerHeight;
-}
-resizeConfettiCanvas();
-window.addEventListener("resize", resizeConfettiCanvas);
-
-const confettiColors = ["#065f46", "#c9962c", "#1b2a4a", "#7a2e3d", "#0f9d78", "#e8c766"];
-
-function launchConfetti(){
-  confettiParticles = [];
-  const count = 140;
-
-  for(let i = 0; i < count; i++){
-    confettiParticles.push({
-      x: Math.random() * confettiCanvas.width,
-      y: -20 - Math.random() * confettiCanvas.height * 0.3,
-      w: 6 + Math.random() * 6,
-      h: 10 + Math.random() * 8,
-      color: confettiColors[Math.floor(Math.random() * confettiColors.length)],
-      speedY: 2 + Math.random() * 3.5,
-      speedX: -1.5 + Math.random() * 3,
-      rotation: Math.random() * 360,
-      rotationSpeed: -6 + Math.random() * 12,
-      opacity: 1
-    });
-  }
-
-  if(!confettiRunning){
-    confettiRunning = true;
-    requestAnimationFrame(animateConfetti);
-  }
-
-  setTimeout(() => { confettiRunning = false; }, 3600);
-}
-
-function animateConfetti(){
-  cctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-
-  confettiParticles.forEach(p => {
-    p.y += p.speedY;
-    p.x += p.speedX;
-    p.rotation += p.rotationSpeed;
-    if(p.y > confettiCanvas.height * 0.85){
-      p.opacity -= 0.02;
-    }
-
-    cctx.save();
-    cctx.translate(p.x, p.y);
-    cctx.rotate(p.rotation * Math.PI / 180);
-    cctx.globalAlpha = Math.max(p.opacity, 0);
-    cctx.fillStyle = p.color;
-    cctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-    cctx.restore();
-  });
-
-  confettiParticles = confettiParticles.filter(p => p.opacity > 0 && p.y < confettiCanvas.height + 30);
-
-  if(confettiRunning || confettiParticles.length > 0){
-    requestAnimationFrame(animateConfetti);
-  } else {
-    cctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-  }
-}
-
+loadWeeklyStatus();
 </script>
 
 </body>

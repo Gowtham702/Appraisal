@@ -26,7 +26,7 @@ body {
     width: 650px;
     padding: 50px;
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255,255,255,0.7);
     backdrop-filter: blur(10px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
@@ -69,7 +69,7 @@ input {
     border: 1px solid #a7f3d0;
     font-size: 14px;
     outline: none;
-    transition: 0.3s;
+    transition: .3s;
 }
 
 input:focus {
@@ -80,14 +80,14 @@ input:focus {
 .btn {
     width: 100%;
     margin-top: 20px;
-    background: linear-gradient(135deg, #10b981, #059669);
+    background: linear-gradient(135deg,#10b981,#059669);
     color: white;
     border: none;
     padding: 14px;
     font-size: 16px;
     border-radius: 10px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: .3s;
 }
 
 .btn:hover {
@@ -95,10 +95,10 @@ input:focus {
     box-shadow: 0 10px 20px rgba(16,185,129,0.4);
 }
 
-@media(max-width: 700px) {
-    .card {
-        width: 90%;
-        padding: 30px;
+@media(max-width:700px){
+    .card{
+        width:90%;
+        padding:30px;
     }
 }
 </style>
@@ -117,34 +117,93 @@ input:focus {
         Tell us a bit about yourself to begin
     </div>
 
-    <!-- UPDATED FORM ACTION -->
-    <form action="spin.html">
+    <form id="employeeForm">
 
         <div class="form-group">
             <label>Employee Name</label>
-            <input type="text" required>
+            <input
+                type="text"
+                id="employeeName"
+                name="employeeName"
+                required>
         </div>
 
         <div class="form-group">
             <label>Employee ID</label>
-            <input type="number" required>
+            <input
+                type="number"
+                id="employeeId"
+                name="employeeId"
+                required>
         </div>
 
         <div class="form-group">
             <label>Department</label>
-            <input type="text" required>
+            <input
+                type="text"
+                id="department"
+                name="department"
+                required>
         </div>
 
         <div class="form-group">
             <label>Current Role</label>
-            <input type="text" required>
+            <input
+                type="text"
+                id="currentRole"
+                name="currentRole"
+                required>
         </div>
 
-        <button type="submit" class="btn">Continue</button>
+        <button type="submit" class="btn">
+            Continue
+        </button>
 
     </form>
 
 </div>
+
+<script>
+
+document.getElementById("employeeForm").addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+    const employee = {
+
+        employeeName : document.getElementById("employeeName").value.trim(),
+
+        employeeId : document.getElementById("employeeId").value.trim(),
+
+        department : document.getElementById("department").value.trim(),
+
+        currentRole : document.getElementById("currentRole").value.trim()
+
+    };
+
+    // Save employee details locally
+    localStorage.setItem(
+        "employee",
+        JSON.stringify(employee)
+    );
+
+    // Individual values (used by the spin page)
+    localStorage.setItem(
+        "appraisalEmployeeId",
+        employee.employeeId
+    );
+
+    localStorage.setItem(
+        "appraisalEmployeeName",
+        employee.employeeName
+    );
+
+    // Go to spin page
+    window.location.href = "spin.html";
+
+});
+
+</script>
 
 </body>
 </html>
